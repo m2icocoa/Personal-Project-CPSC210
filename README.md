@@ -2,13 +2,15 @@
 
 
 
-This is a system where you purchase one of the most popular K-pop artists, Stray Kids' concert tickets and merchandise. 
+This is a system where you can purchase one of the most popular K-pop artists, 
+Stray Kids' concert tickets and merchandise. 
 You can buy either tickets or merchandise or both. 
-The system lets you select seats from the *UBC Thunderbird Arena* map based on your budget. 
-You can also choose what merchandise you want based on your favourite member. 
-If you are a member of the fan club, you have access to membership benefits such as limited merch. 
-Possible features include various price ranges of seats depending on how close to the stage, 
-quantity limit of merchandise per person, and payment system.
+The system lets you select seats from the *UBC Thunderbird Arena* map 
+depending on how close to the stage and your budget. 
+You can also choose merchandise of various kinds such as a light stick, hoodie, poster, etc.
+Some merchandise is available for each member of Stray Kids.
+There might be a quantity limit for merch each person can purchase.
+If you are a member of the fan club, you have access to membership benefits such as limited merch.
 
 The users of this system will be anyone who wants to go to Stray Kids' concert or buy merchandise.
 

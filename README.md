@@ -17,8 +17,8 @@ Thus, I always wanted to create a system where we can buy tickets safely and eff
 
 ## User Stories
 - As a user, I want to be able to select and add a ticket to my cart.
-- As a user, I want to be able to view details of tickets in my cart.
 - As a user, I want to be able to remove a ticket from my cart.
+- As a user, I want to be able to view details of tickets in my cart.
 - As a user, I want to be able to see the total price of tickets in my cart.
 
 ## Potential Future User Stories

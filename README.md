@@ -1,18 +1,21 @@
 # BTS Concert Tickets Purchase System
 
 
-
-This is a system where you can purchase concert tickets for one of the most popular K-pop artists, BTS. 
+This is a system where you can purchase concert tickets for the most popular K-pop artist, BTS. 
 The system lets you select seats from the *UBC Thunderbird Arena* seating chart.
 The price of tickets varies on how close to the stage.
-There is a quantity limit on tickets to prevent a customer from buying all up.
 
-The users of this system will be anyone who wants to go to a BTS concert.
+The users of this system will be anyone who wants to go to a BTS concert held at UBC.
 
-I am a huge fan of BTS. Every time I want to go to their concert, 
-I need to compete with other fans to get better seats. The website sometimes crushes in the middle of buying tickets 
+I have been a huge fan of BTS since I was in junior high school. 
+However, as BTS has gained world popularity in recent years, it has been extremely difficult to get tickets for
+their concert. 
+The ticket-selling website sometimes crushes in the middle of buying tickets 
 because too many people access it at the same time. 
-Thus, I always wanted to create a system where we can buy tickets safely and efficiently.
+Moreover, as they became a global phenomenon, they only hold their concert in a huge stadium, 
+but not in a small arena like the one at UBC.
+Thus, I decided to create a system where we can buy concert tickets, 
+hoping BTS will hold a small concert for UBC students one day.
 
 
 ## User Stories
@@ -23,7 +26,8 @@ Thus, I always wanted to create a system where we can buy tickets safely and eff
 
 ## Potential Future User Stories
 If I have time to do more...
-- As a user, I want to be able to see if a desired seat is still available or already sold out.
+- As a user, I want to be able to see if the desired seat is still available or already sold out.
+- As a user, I want to be able not to exceed the maximum number of tickets I can purchase.
 - As a user, I want to be able to select a ticket whose price is lower than or equal to my budget.
 - As a user, I want to be able to get a discount by using my membership status.
 - As a user, I want to be able to select and add a light stick (ARMY Bomb) to my cart. 

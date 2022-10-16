@@ -2,11 +2,11 @@ package model;
 
 // Represents a ticket with seat leve, section, row, number and price (in dollars)
 public class Ticket {
-    private String level;       // seat level
-    private int section;        // seat section
-    private int row;            // row in the section
-    private int number;         // seat number in the row (from right to left)
-    private double price;          // ticket price
+    private final String level;       // seat level
+    private final int section;        // seat section
+    private final int row;            // row in the section
+    private final int number;         // seat number in the row (from right to left)
+    private final double price;          // ticket price
 
 
     // constructor
@@ -18,11 +18,11 @@ public class Ticket {
     //          selectedNumber is a positive integer [1,20] and set to number
     //          seatPrice is a positive double and set to price
     public Ticket(String selectedLevel, int selectedSection, int selectedRow, int selectedNumber, double seatPrice) {
-        selectedLevel = level;
-        selectedSection = section;
-        selectedRow = row;
-        selectedNumber = number;
-        seatPrice = price;
+        level = selectedLevel;
+        section = selectedSection;
+        row = selectedRow;
+        number = selectedNumber;
+        price = seatPrice;
     }
 
     public String getLevel() {

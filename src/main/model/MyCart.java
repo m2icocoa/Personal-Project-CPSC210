@@ -13,7 +13,7 @@ public class MyCart {
 
     // MODIFIES: this
     // EFFECTS: adds a ticket into my cart unless it's already there, in which case do nothing
-    public void addTicket(Ticket ticket) {
+    public void add(Ticket ticket) {
         if (!tickets.contains(ticket)) {
             tickets.add(ticket);
         }
@@ -37,6 +37,11 @@ public class MyCart {
     // EFFECTS: returns the number of tickets in my cart
     public int quantity() {
         return tickets.size();
+    }
+
+    // EFFECTS: returns the selected ticket in my cart
+    public Ticket get(int i) {
+        return tickets.get(i);
     }
 
     // EFFECTS: return the level of the selected ticket in my cart
@@ -66,11 +71,14 @@ public class MyCart {
 
     // EFFECTS: return the total price of tickets in my cart
     public double totalPrice() {
-        int totalPrice = 0;
-        for (int num = 0; num <= quantity(); num++) {
-            totalPrice += tickets.get(num).getPrice();
+        double priceSum = 0.0;
+        if (!(tickets.size() == 0)) {
+            for (int i = 0; i <= tickets.size() - 1; i++) {
+                priceSum += tickets.get(i).getPrice();
+            }
+            return priceSum;
         }
-        return totalPrice;
+        return priceSum;
     }
 }
 

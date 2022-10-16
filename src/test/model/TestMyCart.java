@@ -1,6 +1,5 @@
 package model;
 
-import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,11 +13,6 @@ public class TestMyCart {
     private Ticket firstTicket;
     private Ticket secondTicket;
     private Ticket thirdTicket;
-
-    @Before
-    public void setup() {
-        testMyCart = new MyCart();
-    }
 
     @BeforeEach
     public void runBefore() {

@@ -3,8 +3,6 @@ package model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -75,6 +73,13 @@ public class TestMyCart {
     }
 
     @Test
+    public void testRemoveOneTicketButNotThere() {
+        testMyCart.add(firstTicket);
+        checkMyCartDoesNotContainTicket(secondTicket);
+        testMyCart.remove(secondTicket);
+    }
+
+    @Test
     public void testGetTicket() {
         testMyCart.add(firstTicket);
         assertEquals(firstTicket, testMyCart.get(0));
@@ -102,31 +107,31 @@ public class TestMyCart {
     @Test
     public void testLevel() {
         testMyCart.add(firstTicket);
-        assertEquals("lower", testMyCart.get(0).getLevel());
+        assertEquals("lower", testMyCart.level(0));
     }
 
     @Test
     public void testSection() {
         testMyCart.add(firstTicket);
-        assertEquals(100, testMyCart.get(0).getSection());
+        assertEquals(100, testMyCart.section(0));
     }
 
     @Test
     public void testRow() {
         testMyCart.add(firstTicket);
-        assertEquals(1, testMyCart.get(0).getRow());
+        assertEquals(1, testMyCart.row(0));
     }
 
     @Test
     public void testNumber() {
         testMyCart.add(firstTicket);
-        assertEquals(1, testMyCart.get(0).getRow());
+        assertEquals(1, testMyCart.number(0));
     }
 
     @Test
     public void testPrice() {
         testMyCart.add(firstTicket);
-        assertEquals(120.0, testMyCart.get(0).getPrice());
+        assertEquals(120.0, testMyCart.price(0));
     }
 
     @Test

@@ -23,7 +23,7 @@ Thus, I always wanted to create a system where we can buy tickets safely and eff
 
 ## Potential Future User Stories
 If I have time to do more...
-- As a user, I want to be able to set my budget. 
+- As a user, I want to be able to see if a desired seat is still available or already sold out.
 - As a user, I want to be able to select a ticket whose price is lower than or equal to my budget.
 - As a user, I want to be able to get a discount by using my membership status.
 - As a user, I want to be able to select and add a light stick (ARMY Bomb) to my cart. 

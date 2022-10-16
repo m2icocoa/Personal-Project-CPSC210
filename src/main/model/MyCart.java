@@ -34,14 +34,14 @@ public class MyCart {
         return tickets.contains(ticket);
     }
 
+    // EFFECTS: return the selected ticket in my cart
+    public Ticket get(int num) {
+        return tickets.get(num);
+    }
+
     // EFFECTS: returns the number of tickets in my cart
     public int quantity() {
         return tickets.size();
-    }
-
-    // EFFECTS: returns the selected ticket in my cart
-    public Ticket get(int i) {
-        return tickets.get(i);
     }
 
     // EFFECTS: return the level of the selected ticket in my cart

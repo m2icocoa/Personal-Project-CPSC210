@@ -1,4 +1,4 @@
-# BTS Concert Tickets and Merchandise Purchase System
+# BTS Concert Tickets Purchase System
 
 
 
@@ -7,7 +7,7 @@ The system lets you select seats from the *UBC Thunderbird Arena* seating chart.
 The price of tickets varies on how close to the stage.
 There is a quantity limit on tickets to prevent a customer from buying all up.
 
-The users of this system will be anyone who wants to go to Stray Kids' concert.
+The users of this system will be anyone who wants to go to a BTS concert.
 
 I am a huge fan of BTS. Every time I want to go to their concert, 
 I need to compete with other fans to get better seats. The website sometimes crushes in the middle of buying tickets 

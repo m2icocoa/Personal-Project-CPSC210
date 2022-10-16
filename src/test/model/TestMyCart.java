@@ -52,6 +52,8 @@ public class TestMyCart {
         checkMyCartDoesNotContainTicket(firstTicket);
     }
 
+
+
     @Test
     public void testTotalPrice() {
         testMyCart.add(firstTicket);

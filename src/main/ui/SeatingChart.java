@@ -19,24 +19,19 @@ public class SeatingChart {
     // MODIFIES: this
     // EFFECTS: processes user input
     private void runSeatingChart() {
-        boolean keepGoing = true;
         String command;
 
         init();
 
-        while (keepGoing) {
-            displayMenu();
-            command = input.next();
-            command = command.toLowerCase();
+        displayMenu();
+        command = input.next();
+        command = command.toLowerCase();
 
-            if (command.equals("q")) {
-                keepGoing = false;
-            } else {
-                processCommand(command);
-                printPrice();
-            }
+        if (command.equals("q")) {
+            System.out.println("\nSee you next time!");
+        } else {
+            processCommand(command);
         }
-        System.out.println("\nSee you next time!");
     }
 
     // MODIFIES: this
@@ -47,9 +42,24 @@ public class SeatingChart {
             selectSection();
             selectRow();
             selectNum();
-
+            printPrice();
+            displayConfirmation();
+            command = input.next();
+            command = command.toLowerCase();
+            confirmationCommand(command);
         } else {
             System.out.println("Selection not valid...");
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: processes user command for confirmation
+    private void confirmationCommand(String command) {
+        if (command.equals("y")) {
+            addSeatToMyCart();
+            runSeatingChart();
+        } else {
+            runSeatingChart();
         }
     }
 
@@ -85,8 +95,18 @@ public class SeatingChart {
         desired.assignNumber(desiredNum);
     }
 
+    // EFFECTS: prints price of the desired seat to the screen
     private void printPrice() {
-        System.out.printf("Price: " + desired.assignPrice(desired.getLevel(), desired.getRow()) + " Dollars");
+        System.out.printf("\tPrice: " + desired.assignPrice(desired.getLevel(), desired.getRow()) + " Dollars");
+    }
+
+    // EFFECTS: add the desired seat to the sc
+    private void addSeatToMyCart() {
+        myCart.add(desired);
+        System.out.println(
+                "\nLevel: " + desired.getLevel() + "\nSection: " + desired.getSection() + "\nRow: " + desired.getRow()
+                        + "\nNumber: " + desired.getNumber() + "\nPrice: " + desired.getPrice()
+                        + "\nThis ticket is added to your cart.");
     }
 
     // MODIFIES: this
@@ -102,5 +122,12 @@ public class SeatingChart {
         System.out.println("Option:");
         System.out.println("\ts -> seat selection");
         System.out.println("\tq -> quit");
+    }
+
+    // EFFECTS: displays confirmation for adding a ticket to the cart to user
+    private void displayConfirmation() {
+        System.out.println("\nWould you like to add the ticket to your cart?");
+        System.out.println("\ty -> yes");
+        System.out.println("\tn -> no");
     }
 }

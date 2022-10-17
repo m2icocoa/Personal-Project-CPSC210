@@ -23,22 +23,32 @@ public class Ticket {
         price = seatPrice;
     }
 
+    // REQUIRES: selectedLevel is either "lower" or "upper"
+    // EFFECTS: selectedLevel is set to level
     public void assignLevel(String selectedLevel) {
         level = selectedLevel;
     }
 
+    // REQUIRES: selectedSection is either [100, 110] or [200, 210]
+    // EFFECTS: selectedSection is set to section
     public void assignSection(int selectedSection) {
         section = selectedSection;
     }
 
+    // REQUIRES: selectedRow is [1, 23]
+    // EFFECTS: selectedRow is set to row
     public void assignRow(int selectedRow) {
         row = selectedRow;
     }
 
+    // REQUIRES: selectedSeatNum is [1, 20]
+    // EFFECTS: selectedSeatNum is set to number
     public void assignNumber(int selectedSeatNum) {
         number = selectedSeatNum;
     }
 
+    // REQUIRES: selectedRow is [1, 23]
+    // EFFECTS: return the price of seats depending on its level and the row number
     public double assignPrice(String selectedLevel, int selectedRow) {
         if (selectedLevel.equals("lower")) {
             price = 100.0 + 2.0 * (23.0 + 1.0 - selectedRow);

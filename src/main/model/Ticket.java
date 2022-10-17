@@ -5,13 +5,11 @@ public class Ticket {
     private String level;       // seat level
     private int section;        // seat section
     private int row;            // row in the section
-    private int number;         // seat number in the row (from right to left)
+    private int number;         // seat number in the row (from left to right)
     private double price;       // ticket price
 
-
-    // constructor
-    // REQUIRES: level has a non-zero length
-    //           section, row, number and price are zero
+    // REQUIRES: selectedLevel has a non-zero length
+    //           selectedSection, selectedRow, selectedNumber and seatPrice are zero
     // EFFECTS: selectedLevel is set to level
     //          selectedSection is a positive integer and set to section
     //          selectedRow is a positive integer [1,23] and set to row

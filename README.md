@@ -21,6 +21,7 @@ Thus, I decided to create a system where we buy concert tickets hoping that BTS 
 - As a user, I want to be able to put a ticket to my cart.
 - As a user, I want to be able to remove a ticket from my cart.
 
+
 ## Potential Future User Stories
 If I have time to do more...
 - As a user, I want to be able to check the number of tickets in my cart.

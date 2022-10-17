@@ -3,12 +3,13 @@ package ui;
 import model.MyCart;
 import model.Ticket;
 
-import java.awt.*;
 import java.util.Scanner;
 
 public class SeatingChart {
     private MyCart myCart;
     private Scanner input;
+    private final Ticket desired =
+            new Ticket(null, 0, 0, 0, 0.0);
 
     // EFFECTS: runs the seating chart
     public SeatingChart() {
@@ -19,7 +20,7 @@ public class SeatingChart {
     // EFFECTS: processes user input
     private void runSeatingChart() {
         boolean keepGoing = true;
-        String command = null;
+        String command;
 
         init();
 
@@ -28,26 +29,14 @@ public class SeatingChart {
             command = input.next();
             command = command.toLowerCase();
 
-
-            if (command.equals("s")) {
-                selectLevel();
-                selectSection();
-                selectRow();
-                selectSeatNum();
-
-                // printSelection(selectedLevel, selectedSection, selectedRow, selectedSeatNum);
-            } else if (command.equals("q")) {
+            if (command.equals("q")) {
                 keepGoing = false;
             } else {
                 processCommand(command);
+                printPrice();
             }
         }
-
         System.out.println("\nSee you next time!");
-    }
-
-    public void printSelection(String selectedLevel, int selectedSection, int selectedRow, int selectedSeatNum) {
-        System.out.printf("Ticket Selected:\n" + selectedLevel, selectedSection, selectedRow, selectedSeatNum);
     }
 
     // MODIFIES: this
@@ -55,45 +44,50 @@ public class SeatingChart {
     private void processCommand(String command) {
         if (command.equals("s")) {
             selectLevel();
+            selectSection();
+            selectRow();
+            selectNum();
+
         } else {
             System.out.println("Selection not valid...");
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: conducts a seat level selection
     private void selectLevel() {
-        Ticket desired = new Ticket(null, 0, 0, 0, 0.0);
         System.out.print("Enter your desired seat level: ");
-        String selectedLevel = input.next();
-        desired.assignLevel(selectedLevel);
+        String desiredLevel = input.next();
+        desired.assignLevel(desiredLevel);
     }
 
     // MODIFIES: this
     // EFFECTS: conducts a seat section selection
     private void selectSection() {
-        Ticket desired = new Ticket(null, 0, 0, 0, 0.0);
         System.out.print("Enter your desired seat section: ");
-        int selectedSection = input.nextInt();
-        desired.assignSection(selectedSection);
+        int desiredSection = input.nextInt();
+        desired.assignSection(desiredSection);
     }
 
     // MODIFIES: this
     // EFFECTS: conducts a seat row selection
     private void selectRow() {
-        Ticket desired = new Ticket(null, 0, 0, 0, 0.0);
         System.out.print("Enter your desired seat row: ");
-        int selectedRow = input.nextInt();
-        desired.assignRow(selectedRow);
+        int desiredRow = input.nextInt();
+        desired.assignRow(desiredRow);
     }
 
     // MODIFIES: this
-    // EFFECTS: conducts a seat seat number selection
-    private void selectSeatNum() {
-        Ticket desired = new Ticket(null, 0, 0, 0, 0.0);
+    // EFFECTS: conducts a seat number selection
+    private void selectNum() {
         System.out.print("Enter your desired seat number: ");
-        int selectedSeatNum = input.nextInt();
-        desired.assignNumber(selectedSeatNum);
+        int desiredNum = input.nextInt();
+        desired.assignNumber(desiredNum);
     }
 
+    private void printPrice() {
+        System.out.printf("Price: " + desired.assignPrice(desired.getLevel(), desired.getRow()) + " Dollars");
+    }
 
     // MODIFIES: this
     // EFFECTS: initializes my cart

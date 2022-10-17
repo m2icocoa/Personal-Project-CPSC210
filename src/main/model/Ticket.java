@@ -6,7 +6,7 @@ public class Ticket {
     private int section;        // seat section
     private int row;            // row in the section
     private int number;         // seat number in the row (from right to left)
-    private double price;          // ticket price
+    private double price;       // ticket price
 
 
     // constructor
@@ -39,6 +39,17 @@ public class Ticket {
 
     public void assignNumber(int selectedSeatNum) {
         number = selectedSeatNum;
+    }
+
+    public double assignPrice(String selectedLevel, int selectedRow) {
+        if (selectedLevel.equals("lower")) {
+            price = 100.0 + 2.0 * (23.0 + 1.0 - selectedRow);
+        } else if (selectedLevel.equals("upper")) {
+            price = 80.0 + 1.5 * (23.0 + 1.0 - selectedRow);
+        } else {
+            price = 0.0;
+        }
+        return price;
     }
 
     public String getLevel() {

@@ -23,28 +23,45 @@ public class Ticket {
         price = seatPrice;
     }
 
+
     // REQUIRES: selectedLevel is either "lower" or "upper"
     // EFFECTS: selectedLevel is set to level
     public void assignLevel(String selectedLevel) {
-        level = selectedLevel;
+        if (selectedLevel.equals("lower") || selectedLevel.equals("upper")) {
+            level = selectedLevel;
+        } else {
+            System.out.println("This is invalid.");
+        }
     }
 
     // REQUIRES: selectedSection is either [100, 110] or [200, 210]
     // EFFECTS: selectedSection is set to section
     public void assignSection(int selectedSection) {
-        section = selectedSection;
+        if (selectedSection >= 100 && selectedSection <= 110 || selectedSection >= 200 && selectedSection <= 210) {
+            section = selectedSection;
+        } else {
+            System.out.println("This is invalid.");
+        }
     }
 
     // REQUIRES: selectedRow is [1, 23]
     // EFFECTS: selectedRow is set to row
     public void assignRow(int selectedRow) {
-        row = selectedRow;
+        if (selectedRow >= 1 && selectedRow <= 23) {
+            row = selectedRow;
+        } else {
+            System.out.println("This is invalid.");
+        }
     }
 
-    // REQUIRES: selectedSeatNum is [1, 20]
-    // EFFECTS: selectedSeatNum is set to number
-    public void assignNumber(int selectedSeatNum) {
-        number = selectedSeatNum;
+    // REQUIRES: selectedNumber is [1, 20]
+    // EFFECTS: selectedNumber is set to number
+    public void assignNumber(int selectedNumber) {
+        if (selectedNumber >= 1 && selectedNumber <= 20) {
+            number = selectedNumber;
+        } else {
+            System.out.println("This is invalid.");
+        }
     }
 
     // REQUIRES: selectedRow is [1, 23]

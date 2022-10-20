@@ -1,8 +1,8 @@
 package model;
 
-
 import java.util.ArrayList;
 
+//
 public class MyCart {
     ArrayList<Ticket> tickets;
 

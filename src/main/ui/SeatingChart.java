@@ -5,26 +5,25 @@ import model.Ticket;
 
 import java.util.Scanner;
 
+//
 public class SeatingChart {
     private MyCart myCart;
     private Scanner input;
     private Ticket desired =
             new Ticket(null, 0, 0, 0, 0.0);
 
+
     // EFFECTS: runs the seating chart
     public SeatingChart() {
+        init();
         runSeatingChart();
     }
 
     // MODIFIES: this
     // EFFECTS: processes user input
     private void runSeatingChart() {
-        String command;
-
-        init();
-
         displayMenu();
-        command = input.next();
+        String command = input.next();
         command = command.toLowerCase();
 
         if (command.equals("q")) {
@@ -38,27 +37,35 @@ public class SeatingChart {
     // EFFECTS: processes user command
     private void processCommand(String command) {
         if (command.equals("s")) {
-            selectLevel();
-            selectSection();
-            selectRow();
-            selectNum();
-            printPrice();
-            displayAddOrRemove();
-            command = input.next();
-            command = command.toLowerCase();
-            if (command.equals("a")) {
-                addSeatToMyCart();
-                runSeatingChart();
-            } else {
-                removeSeatFromMyCart();
-                runSeatingChart();
-            }
+            doSelect();
         } else if (command.equals("n")) {
             checkHowManyTickets();
+            runSeatingChart();
         } else {
-            System.out.println("Selection not valid...");
+            System.out.println("Selection is not valid.");
+            runSeatingChart();
         }
     }
+
+    private void doSelect() {
+        selectLevel();
+        selectSection();
+        selectRow();
+        selectNum();
+        printPrice();
+        displayAddOrRemove();
+
+        String command = input.next();
+        command = command.toLowerCase();
+        if (command.equals("a")) {
+            addSeatToMyCart();
+            runSeatingChart();
+        } else {
+            removeSeatFromMyCart();
+            runSeatingChart();
+        }
+    }
+
 
     // MODIFIES: this
     // EFFECTS: conducts a seat level selection
@@ -130,7 +137,7 @@ public class SeatingChart {
 
     // EFFECTS: displays menu of options to user
     private void displayMenu() {
-        System.out.println("Option:");
+        System.out.println("Main Option:");
         System.out.println("\ts -> seat selection");
         System.out.println("\tn -> check the number of tickets in your cart");
         System.out.println("\tq -> quit");

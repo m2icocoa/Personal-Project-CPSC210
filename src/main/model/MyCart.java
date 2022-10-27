@@ -2,7 +2,7 @@ package model;
 
 import java.util.ArrayList;
 
-//
+// Represents a cart with tickets selected
 public class MyCart {
     ArrayList<Ticket> tickets;
 
@@ -11,9 +11,10 @@ public class MyCart {
         this.tickets = new ArrayList<>();
     }
 
+
     // MODIFIES: this
     // EFFECTS: adds a ticket into my cart unless it's already there, in which case do nothing
-    public void add(Ticket ticket) {
+    public void addTicket(Ticket ticket) {
         if (!tickets.contains(ticket)) {
             tickets.add(ticket);
         }
@@ -31,7 +32,11 @@ public class MyCart {
     // EFFECTS: if the ticket is in my cart, return true.
     //          Otherwise, return false.
     public boolean contains(Ticket ticket) {
-        return tickets.contains(ticket);
+        if (tickets.contains(ticket)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     // EFFECTS: return the selected ticket in my cart

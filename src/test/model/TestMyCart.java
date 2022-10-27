@@ -31,30 +31,30 @@ public class TestMyCart {
     @Test
     public void testAddOneTicket() {
         checkMyCartDoesNotContainTicket(firstTicket);
-        testMyCart.add(firstTicket);
+        testMyCart.addTicket(firstTicket);
         checkMyCartContainsTicket(firstTicket);
     }
 
     @Test
     public void testAddSameTicketMultipleTimes() {
         checkMyCartDoesNotContainTicket(firstTicket);
-        testMyCart.add(firstTicket);
+        testMyCart.addTicket(firstTicket);
         checkMyCartContainsTicket(firstTicket);
-        testMyCart.add(firstTicket);
+        testMyCart.addTicket(firstTicket);
         checkMyCartContainsTicket(firstTicket);
     }
 
     @Test
     public void testAddDifferentTickets() {
         checkMyCartDoesNotContainTicket(firstTicket);
-        testMyCart.add(firstTicket);
+        testMyCart.addTicket(firstTicket);
         checkMyCartDoesNotContainTicket(secondTicket);
-        testMyCart.add(secondTicket);
+        testMyCart.addTicket(secondTicket);
     }
 
     @Test
     public void testRemoveOneTicket() {
-        testMyCart.add(firstTicket);
+        testMyCart.addTicket(firstTicket);
         checkMyCartContainsTicket(firstTicket);
         testMyCart.remove(firstTicket);
         checkMyCartDoesNotContainTicket(firstTicket);
@@ -62,8 +62,8 @@ public class TestMyCart {
 
     @Test
     public void testRemoveDifferentTickets() {
-        testMyCart.add(firstTicket);
-        testMyCart.add(secondTicket);
+        testMyCart.addTicket(firstTicket);
+        testMyCart.addTicket(secondTicket);
         checkMyCartContainsTicket(firstTicket);
         testMyCart.remove(firstTicket);
         checkMyCartDoesNotContainTicket(firstTicket);
@@ -74,14 +74,14 @@ public class TestMyCart {
 
     @Test
     public void testRemoveOneTicketButNotThere() {
-        testMyCart.add(firstTicket);
+        testMyCart.addTicket(firstTicket);
         checkMyCartDoesNotContainTicket(secondTicket);
         testMyCart.remove(secondTicket);
     }
 
     @Test
     public void testGetTicket() {
-        testMyCart.add(firstTicket);
+        testMyCart.addTicket(firstTicket);
         assertEquals(firstTicket, testMyCart.get(0));
     }
 
@@ -98,53 +98,53 @@ public class TestMyCart {
 
     @Test
     public void testQuantity() {
-        testMyCart.add(firstTicket);
-        testMyCart.add(secondTicket);
-        testMyCart.add(thirdTicket);
+        testMyCart.addTicket(firstTicket);
+        testMyCart.addTicket(secondTicket);
+        testMyCart.addTicket(thirdTicket);
         assertEquals(3, testMyCart.quantity());
     }
 
     @Test
     public void testLevel() {
-        testMyCart.add(firstTicket);
+        testMyCart.addTicket(firstTicket);
         assertEquals("lower", testMyCart.level(0));
     }
 
     @Test
     public void testSection() {
-        testMyCart.add(firstTicket);
+        testMyCart.addTicket(firstTicket);
         assertEquals(100, testMyCart.section(0));
     }
 
     @Test
     public void testRow() {
-        testMyCart.add(firstTicket);
+        testMyCart.addTicket(firstTicket);
         assertEquals(1, testMyCart.row(0));
     }
 
     @Test
     public void testNumber() {
-        testMyCart.add(firstTicket);
+        testMyCart.addTicket(firstTicket);
         assertEquals(1, testMyCart.number(0));
     }
 
     @Test
     public void testPrice() {
-        testMyCart.add(firstTicket);
+        testMyCart.addTicket(firstTicket);
         assertEquals(120.0, testMyCart.price(0));
     }
 
     @Test
     public void testTotalPriceOneTicket() {
-        testMyCart.add(firstTicket);
+        testMyCart.addTicket(firstTicket);
         assertEquals(120.0, testMyCart.totalPrice());
     }
 
     @Test
     public void testTotalPriceMultipleTickets() {
-        testMyCart.add(firstTicket);
-        testMyCart.add(secondTicket);
-        testMyCart.add(thirdTicket);
+        testMyCart.addTicket(firstTicket);
+        testMyCart.addTicket(secondTicket);
+        testMyCart.addTicket(thirdTicket);
         assertEquals(251.5, testMyCart.totalPrice());
     }
 

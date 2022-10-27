@@ -2,84 +2,80 @@ package model;
 
 import java.util.ArrayList;
 
-// Represents a cart with tickets selected
+// Represents my cart with tickets selected
 public class MyCart {
-    ArrayList<Ticket> tickets;
+    ArrayList<Ticket> cart;
 
     // EFFECTS: constructs an empty cart
     public MyCart() {
-        this.tickets = new ArrayList<>();
+        this.cart = new ArrayList<>();
     }
-
 
     // MODIFIES: this
     // EFFECTS: adds a ticket into my cart unless it's already there, in which case do nothing
     public void addTicket(Ticket ticket) {
-        if (!tickets.contains(ticket)) {
-            tickets.add(ticket);
-        }
+        //if (!cart.contains(ticket)) {
+        cart.add(ticket);
+        //}
     }
 
     // MODIFIES: this
     // EFFECTS: if the ticket is in my cart, then remove it from my cart.
     //          Otherwise, do nothing.
-    public void remove(Ticket ticket) {
-        if (tickets.contains(ticket)) {
-            tickets.remove(ticket);
-        }
+    public void removeTicket(Ticket ticket) {
+        //if (cart.contains(ticket)) {
+        cart.remove(ticket);
+        //}
     }
 
-    // EFFECTS: if the ticket is in my cart, return true.
-    //          Otherwise, return false.
+    // EFFECTS: if the ticket is in my cart, return true,
+    //          otherwise, return false.
     public boolean contains(Ticket ticket) {
-        if (tickets.contains(ticket)) {
-            return true;
-        } else {
-            return false;
-        }
+        return cart.contains(ticket);
     }
 
     // EFFECTS: return the selected ticket in my cart
-    public Ticket get(int num) {
-        return tickets.get(num);
+    public Ticket seeInside(int num) {
+        return cart.get(num);
     }
 
     // EFFECTS: returns the number of tickets in my cart
     public int quantity() {
-        return tickets.size();
+        return cart.size();
     }
 
     // EFFECTS: return the level of the selected ticket in my cart
     public String level(int num) {
-        return tickets.get(num).getLevel();
+        return cart.get(num).getLevel();
     }
 
     // EFFECTS: return the section of the selected ticket in my cart
     public int section(int num) {
-        return tickets.get(num).getSection();
+        return cart.get(num).getSection();
     }
 
     // EFFECTS: return the row of the selected ticket in my cart
     public int row(int num) {
-        return tickets.get(num).getRow();
+        return cart.get(num).getRow();
     }
 
     // EFFECTS: return the number of the selected ticket in my cart
     public int number(int num) {
-        return tickets.get(num).getNumber();
+        return cart.get(num).getNumber();
     }
 
     // EFFECTS: return the price of the selected ticket in my cart
     public double price(int num) {
-        return tickets.get(num).getPrice();
+        return cart.get(num).getPrice();
     }
 
-    // EFFECTS: return the total price of tickets in my cart
+    // EFFECTS: if the cart contains at least one ticket, returns the total price of tickets in my cart,
+    //          otherwise, returns $0.0
     public double totalPrice() {
         double priceSum = 0.0;
-        if (!(tickets.size() == 0)) {
-            for (int i = 0; i <= tickets.size() - 1; i++) {
-                priceSum += tickets.get(i).getPrice();
+        if (!(cart.size() == 0)) {
+            for (Ticket ticket : cart) {
+                priceSum += ticket.getPrice();
             }
             return priceSum;
         }

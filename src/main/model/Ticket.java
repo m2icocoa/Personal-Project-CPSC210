@@ -1,76 +1,58 @@
 package model;
 
-// Represents a ticket with seat leve, section, row, number and price (in dollars)
+// Represents a ticket with seat level, section, row, number and price (in dollars)
 public class Ticket {
     private String level;       // seat level
     private int section;        // seat section
-    private int row;            // row in the section
+    private int row;            // seat row in the section
     private int number;         // seat number in the row (from left to right)
-    private double price;       // ticket price
+    private double price;       // seat price
 
-    // REQUIRES: selectedLevel has a non-zero length
-    //           selectedSection, selectedRow, selectedNumber and seatPrice are zero
-    // EFFECTS: selectedLevel is set to level
-    //          selectedSection is a positive integer and set to section
-    //          selectedRow is a positive integer [1,23] and set to row
-    //          selectedNumber is a positive integer [1,20] and set to number
-    //          seatPrice is a positive double and set to price
-    public Ticket(String selectedLevel, int selectedSection, int selectedRow, int selectedNumber, double seatPrice) {
-        level = selectedLevel;
-        section = selectedSection;
-        row = selectedRow;
-        number = selectedNumber;
+    // REQUIRES: seatLevel has a non-zero length
+    //           seatSection is a positive integer [100,110] or [200,210]
+    //           seatRow is a positive integer [1,23]
+    //           seatNumber is a positive integer [1,20]
+    //           and seatPrice a positive double
+    // EFFECTS: seatLevel is set to level
+    //          seatSection is set to section
+    //          seatRow is set to row
+    //          seatNumber is set to number
+    //          and seatPrice is set to price
+    public Ticket(String seatLevel, int seatSection, int seatRow, int seatNumber, double seatPrice) {
+        level = seatLevel;
+        section = seatSection;
+        row = seatRow;
+        number = seatNumber;
         price = seatPrice;
     }
 
-
-    // REQUIRES: selectedLevel is either "lower" or "upper"
-    // EFFECTS: selectedLevel is set to level
-    public void assignLevel(String selectedLevel) {
-        if (selectedLevel.equals("lower") || selectedLevel.equals("upper")) {
-            level = selectedLevel;
-        } else {
-            System.out.println("This is invalid.");
-        }
+    // EFFECTS: assigns seatLevel to level
+    public void assignLevel(String seatLevel) {
+        level = seatLevel;
     }
 
-    // REQUIRES: selectedSection is either [100, 110] or [200, 210]
-    // EFFECTS: selectedSection is set to section
-    public void assignSection(int selectedSection) {
-        if (selectedSection >= 100 && selectedSection <= 110 || selectedSection >= 200 && selectedSection <= 210) {
-            section = selectedSection;
-        } else {
-            System.out.println("This is invalid.");
-        }
+    // EFFECTS: assigns seatSection to section
+    public void assignSection(int seatSection) {
+        section = seatSection;
     }
 
-    // REQUIRES: selectedRow is [1, 23]
-    // EFFECTS: selectedRow is set to row
-    public void assignRow(int selectedRow) {
-        if (selectedRow >= 1 && selectedRow <= 23) {
-            row = selectedRow;
-        } else {
-            System.out.println("This is invalid.");
-        }
+    // EFFECTS: assigns seatRow to row
+    public void assignRow(int seatRow) {
+        row = seatRow;
     }
 
-    // REQUIRES: selectedNumber is [1, 20]
-    // EFFECTS: selectedNumber is set to number
-    public void assignNumber(int selectedNumber) {
-        if (selectedNumber >= 1 && selectedNumber <= 20) {
-            number = selectedNumber;
-        } else {
-            System.out.println("This is invalid.");
-        }
+    // EFFECTS: assigns it to number
+    public void assignNumber(int seatNumber) {
+        number = seatNumber;
     }
 
-    // REQUIRES: selectedRow is [1, 23]
+    // REQUIRES: seatRow is [1, 23]
     // EFFECTS: return the price of seats depending on its level and the row number
-    public double assignPrice(String selectedLevel, int selectedRow) {
-        if (selectedLevel.equals("lower")) {
-            price = 100.0 + 2.0 * (23.0 + 1.0 - selectedRow);
-        } else if (selectedLevel.equals("upper")) {
-            price = 80.0 + 1.5 * (23.0 + 1.0 - selectedRow);
+    public double assignPrice(String seatLevel, int seatRow) {
+        if (seatLevel.equals("lower")) {
+            price = 100.0 + 2.0 * (23.0 + 1.0 - seatRow);
+        } else if (seatLevel.equals("upper")) {
+            price = 80.0 + 1.5 * (23.0 + 1.0 - seatRow);
         } else {
             price = 0.0;
         }

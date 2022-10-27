@@ -56,7 +56,7 @@ public class TestMyCart {
     public void testRemoveOneTicket() {
         testMyCart.addTicket(firstTicket);
         checkMyCartContainsTicket(firstTicket);
-        testMyCart.remove(firstTicket);
+        testMyCart.removeTicket(firstTicket);
         checkMyCartDoesNotContainTicket(firstTicket);
     }
 
@@ -65,10 +65,10 @@ public class TestMyCart {
         testMyCart.addTicket(firstTicket);
         testMyCart.addTicket(secondTicket);
         checkMyCartContainsTicket(firstTicket);
-        testMyCart.remove(firstTicket);
+        testMyCart.removeTicket(firstTicket);
         checkMyCartDoesNotContainTicket(firstTicket);
         checkMyCartContainsTicket(secondTicket);
-        testMyCart.remove(secondTicket);
+        testMyCart.removeTicket(secondTicket);
         checkMyCartDoesNotContainTicket(secondTicket);
     }
 
@@ -76,13 +76,13 @@ public class TestMyCart {
     public void testRemoveOneTicketButNotThere() {
         testMyCart.addTicket(firstTicket);
         checkMyCartDoesNotContainTicket(secondTicket);
-        testMyCart.remove(secondTicket);
+        testMyCart.removeTicket(secondTicket);
     }
 
     @Test
     public void testGetTicket() {
         testMyCart.addTicket(firstTicket);
-        assertEquals(firstTicket, testMyCart.get(0));
+        assertEquals(firstTicket, testMyCart.seeInside(0));
     }
 
     @Test

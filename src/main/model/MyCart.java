@@ -28,15 +28,26 @@ public class MyCart {
         }
     }
 
-    // EFFECTS: if the ticket is in my cart, return true,
+    // EFFECTS: if the exact same ticket is in the cart, return true,
     //          otherwise, return false.
-    public boolean ifContains(Ticket ticket) {
-        return cart.contains(ticket);
+    public boolean ifContains(Ticket selectedTicket) {
+        for (Ticket ticket : cart) {
+            if (selectedTicket.getLevel().equals(ticket.getLevel())) {
+                if (selectedTicket.getSection() == ticket.getSection()) {
+                    if (selectedTicket.getRow() == ticket.getRow()) {
+                        if (selectedTicket.getNumber() == ticket.getNumber()) {
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        return false;
     }
 
     // EFFECTS: return the selected ticket in my cart
     public Ticket seeInside(int num) {
-        return cart.get(num);
+        return cart.get(num - 1);
     }
 
     // EFFECTS: returns the number of tickets in my cart

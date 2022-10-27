@@ -28,7 +28,7 @@ public class MyCart {
         }
     }
 
-    // EFFECTS: if the exact same ticket is in the cart, return true,
+    // EFFECTS: if the exact same ticket is in my cart, return true,
     //          otherwise, return false.
     public boolean ifContains(Ticket selectedTicket) {
         for (Ticket ticket : cart) {
@@ -77,7 +77,7 @@ public class MyCart {
 
     // EFFECTS: return the price of the selected ticket in my cart
     public double price(int num) {
-        return cart.get(num).getPrice();
+        return cart.get(num - 1).getPrice();
     }
 
     // EFFECTS: if the cart contains at least one ticket, returns the total price of tickets in my cart,

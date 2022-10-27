@@ -8,19 +8,25 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class TestMyCart {
     private MyCart testMyCart;
-    private Ticket firstTicket;
-    private Ticket secondTicket;
-    private Ticket thirdTicket;
+    private Ticket ticketOne;
+    private Ticket ticketTwo;
+    private Ticket ticketThree;
+    private Ticket ticketFour;
+    private Ticket ticketFive;
 
     @BeforeEach
     public void runBefore() {
         testMyCart = new MyCart();
-        firstTicket =
-                new Ticket("lower", 100, 1, 1);
-        secondTicket =
-                new Ticket("upper", 201, 15, 9);
-        thirdTicket  =
-                new Ticket("upper", 210, 20, 20);
+        ticketOne =
+                new Ticket("lower", 100, 1, 1, 120.0);
+        ticketTwo =
+                new Ticket("lower", 100, 1, 2,110.0);
+        ticketThree =
+                new Ticket("lower", 100, 2, 1, 90.5);
+        ticketFour =
+                new Ticket("lower", 102, 1,1, 120.0);
+        ticketFive =
+                new Ticket("upper", 201,1,1,120.0);
     }
 
     @Test
@@ -30,122 +36,131 @@ public class TestMyCart {
 
     @Test
     public void testAddOneTicket() {
-        checkMyCartDoesNotContainTicket(firstTicket);
-        testMyCart.addTicket(firstTicket);
-        checkMyCartContainsTicket(firstTicket);
+        testMyCart.addTicket(ticketOne);
+        assertEquals(1, testMyCart.quantity());
     }
 
     @Test
     public void testAddSameTicketMultipleTimes() {
-        checkMyCartDoesNotContainTicket(firstTicket);
-        testMyCart.addTicket(firstTicket);
-        checkMyCartContainsTicket(firstTicket);
-        testMyCart.addTicket(firstTicket);
-        checkMyCartContainsTicket(firstTicket);
+        testMyCart.addTicket(ticketOne);
+        testMyCart.addTicket(ticketOne);
+        assertEquals(1, testMyCart.quantity());
     }
 
     @Test
     public void testAddDifferentTickets() {
-        checkMyCartDoesNotContainTicket(firstTicket);
-        testMyCart.addTicket(firstTicket);
-        checkMyCartDoesNotContainTicket(secondTicket);
-        testMyCart.addTicket(secondTicket);
+        testMyCart.addTicket(ticketOne);
+        testMyCart.addTicket(ticketTwo);
+        assertEquals(2, testMyCart.quantity());
     }
 
     @Test
     public void testRemoveOneTicket() {
-        testMyCart.addTicket(firstTicket);
-        checkMyCartContainsTicket(firstTicket);
-        testMyCart.removeTicket(firstTicket);
-        checkMyCartDoesNotContainTicket(firstTicket);
+        testMyCart.addTicket(ticketOne);
+        testMyCart.removeTicket(ticketOne);
+        assertEquals(0,testMyCart.quantity());
+        assertFalse(testMyCart.ifContains(ticketOne));
     }
 
     @Test
     public void testRemoveDifferentTickets() {
-        testMyCart.addTicket(firstTicket);
-        testMyCart.addTicket(secondTicket);
-        checkMyCartContainsTicket(firstTicket);
-        testMyCart.removeTicket(firstTicket);
-        checkMyCartDoesNotContainTicket(firstTicket);
-        checkMyCartContainsTicket(secondTicket);
-        testMyCart.removeTicket(secondTicket);
-        checkMyCartDoesNotContainTicket(secondTicket);
+        testMyCart.addTicket(ticketOne);
+        testMyCart.addTicket(ticketTwo);
+        testMyCart.addTicket(ticketThree);
+        testMyCart.removeTicket(ticketOne);
+        testMyCart.removeTicket(ticketTwo);
+        assertEquals(1,testMyCart.quantity());
+        assertFalse(testMyCart.ifContains(ticketOne));
+        assertFalse(testMyCart.ifContains(ticketTwo));
+        assertTrue(testMyCart.ifContains(ticketThree));
     }
 
     @Test
     public void testRemoveOneTicketButNotThere() {
-        testMyCart.addTicket(firstTicket);
-        checkMyCartDoesNotContainTicket(secondTicket);
-        testMyCart.removeTicket(secondTicket);
+        testMyCart.addTicket(ticketOne);
+        assertFalse(testMyCart.ifContains(ticketTwo));
+        testMyCart.removeTicket(ticketTwo);
+        assertEquals(1, testMyCart.quantity());
     }
 
     @Test
     public void testGetTicket() {
-        testMyCart.addTicket(firstTicket);
-        assertEquals(firstTicket, testMyCart.seeInside(0));
+        testMyCart.addTicket(ticketOne);
+        assertEquals(ticketOne, testMyCart.seeInside(1));
     }
 
     @Test
-    private void checkMyCartDoesNotContainTicket(Ticket ticket) {
-        assertFalse(testMyCart.ifContains(ticket));
+    public void MyCartDoesNotContainTicket() {
+        testMyCart.addTicket(ticketOne);
+        assertFalse(testMyCart.ifContains(ticketTwo));
+        assertFalse(testMyCart.ifContains(ticketThree));
+        assertFalse(testMyCart.ifContains(ticketFour));
+        assertFalse(testMyCart.ifContains(ticketFive));
     }
 
     @Test
-    private void checkMyCartContainsTicket(Ticket ticket) {
-        assertTrue(testMyCart.quantity() > 0);
-        assertTrue(testMyCart.ifContains(ticket));
+    public void MyCartContainsTicket() {
+        testMyCart.addTicket(ticketOne);
+        testMyCart.addTicket(ticketTwo);
+        testMyCart.addTicket(ticketThree);
+        assertTrue(testMyCart.ifContains(ticketOne));
+        assertTrue(testMyCart.ifContains(ticketTwo));
+        assertTrue(testMyCart.ifContains(ticketThree));
     }
 
     @Test
     public void testQuantity() {
-        testMyCart.addTicket(firstTicket);
-        testMyCart.addTicket(secondTicket);
-        testMyCart.addTicket(thirdTicket);
+        testMyCart.addTicket(ticketOne);
+        testMyCart.addTicket(ticketTwo);
+        testMyCart.addTicket(ticketThree);
         assertEquals(3, testMyCart.quantity());
     }
 
     @Test
     public void testLevel() {
-        testMyCart.addTicket(firstTicket);
+        testMyCart.addTicket(ticketOne);
         assertEquals("lower", testMyCart.level(0));
     }
 
     @Test
     public void testSection() {
-        testMyCart.addTicket(firstTicket);
+        testMyCart.addTicket(ticketOne);
         assertEquals(100, testMyCart.section(0));
     }
 
     @Test
     public void testRow() {
-        testMyCart.addTicket(firstTicket);
+        testMyCart.addTicket(ticketOne);
         assertEquals(1, testMyCart.row(0));
     }
 
     @Test
     public void testNumber() {
-        testMyCart.addTicket(firstTicket);
+        testMyCart.addTicket(ticketOne);
         assertEquals(1, testMyCart.number(0));
     }
 
     @Test
     public void testPrice() {
-        testMyCart.addTicket(firstTicket);
-        assertEquals(120.0, testMyCart.price(0));
+        testMyCart.addTicket(ticketOne);
+        testMyCart.addTicket(ticketTwo);
+        assertEquals(120.0, testMyCart.price(1));
     }
 
     @Test
     public void testTotalPriceOneTicket() {
-        testMyCart.addTicket(firstTicket);
-        assertEquals(120.0, testMyCart.totalPrice());
+        testMyCart.addTicket(ticketOne);
+        testMyCart.addTicket(ticketTwo);
+        testMyCart.addTicket(ticketThree);
+        assertEquals(110.0, testMyCart.price(2));
     }
 
     @Test
     public void testTotalPriceMultipleTickets() {
-        testMyCart.addTicket(firstTicket);
-        testMyCart.addTicket(secondTicket);
-        testMyCart.addTicket(thirdTicket);
-        assertEquals(251.5, testMyCart.totalPrice());
+        testMyCart.addTicket(ticketOne);
+        testMyCart.addTicket(ticketTwo);
+        testMyCart.addTicket(ticketThree);
+        assertEquals(320.5, testMyCart.totalPrice());
     }
 
     @Test

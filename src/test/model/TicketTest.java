@@ -12,7 +12,7 @@ class TicketTest {
     @BeforeEach
     public void runBefore() {
         testTicket =
-                new Ticket("upper", 200, 1, 10);
+                new Ticket("upper", 200, 1, 10, 50.5);
     }
 
     @Test

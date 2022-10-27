@@ -10,7 +10,7 @@ public class SeatingChart {
     private MyCart myCart;
     private Scanner input;
     private Ticket selected =
-            new Ticket(null, 0, 0, 0);
+            new Ticket(null, 0, 0, 0, 0.0);
 
     // EFFECTS: runs the seating chart
     public SeatingChart() {
@@ -170,7 +170,7 @@ public class SeatingChart {
         } else {
             System.out.println("You already have this ticket in your cart.");
         }
-        selected = new Ticket(null, 0, 0, 0);
+        selected = new Ticket(null, 0, 0, 0,0.0);
     }
 
     // EFFECTS: count how many tickets in the cart

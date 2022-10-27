@@ -9,8 +9,8 @@ import java.util.Scanner;
 public class SeatingChart {
     private MyCart myCart;
     private Scanner input;
-    private final Ticket selected =
-            new Ticket(null, 0, 0, 0, 0.0);
+    private Ticket selected =
+            new Ticket(null, 0, 0, 0);
 
     // EFFECTS: runs the seating chart
     public SeatingChart() {
@@ -43,14 +43,19 @@ public class SeatingChart {
     // MODIFIES: this
     // EFFECTS: processes user command
     private void processCommand(String command) {
-        if (command.equals("s")) {
-            doSelect();
-        } else if (command.equals("n")) {
-            checkHowManyTickets();
-        } else if (command.equals("p")) {
-            checkTotalPrice();
-        } else {
-            System.out.println("Invalid selection.");
+        switch (command) {
+            case "s":
+                doSelect();
+                break;
+            case "n":
+                checkHowManyTickets();
+                break;
+            case "p":
+                checkTotalPrice();
+                break;
+            default:
+                System.out.println("Invalid selection.");
+                break;
         }
     }
 
@@ -78,7 +83,6 @@ public class SeatingChart {
             System.out.println("Invalid selection.");
         }
     }
-
 
     // MODIFIES: this
     // EFFECTS: if the preferred seat level is either lower or upper, conducts a seat level selection,
@@ -141,7 +145,7 @@ public class SeatingChart {
         System.out.println("Enter the seat number you prefer from 1 to 20.");
         int selectedNumber = input.nextInt();
         if (selectedNumber >= 1 && selectedNumber <= 20) {
-            selected.assignRow(selectedNumber);
+            selected.assignNumber(selectedNumber);
         } else {
             System.out.println("You entered an invalid number.");
         }
@@ -156,22 +160,17 @@ public class SeatingChart {
 
     // EFFECTS: add the preferred seat to the cart
     private void addSeatToMyCart() {
-        myCart.addTicket(selected);
-        System.out.println(
-                "\nLevel: " + selected.getLevel()
-                        + "\nSection: " + selected.getSection() + "\nRow: " + selected.getRow()
-                        + "\nNumber: " + selected.getNumber() + "\nPrice: " + selected.getPrice()
-                        + "\nThis ticket is added to your cart.");
-    }
-
-    // EFFECTS: remove the preferred seat from the cart
-    private void removeSeatFromMyCart() {
-        myCart.removeTicket(selected);
-        System.out.println(
-                "\nLevel: " + selected.getLevel()
-                        + "\nSection: " + selected.getSection() + "\nRow: " + selected.getRow()
-                        + "\nNumber: " + selected.getNumber() + "\nPrice: " + selected.getPrice()
-                        + "\nThis ticket is removed from your cart.");
+        if (!myCart.ifContains(selected)) {
+            myCart.addTicket(selected);
+            System.out.println(
+                    "\nLevel: " + selected.getLevel()
+                            + "\nSection: " + selected.getSection() + "\nRow: " + selected.getRow()
+                            + "\nNumber: " + selected.getNumber() + "\nPrice: " + selected.getPrice()
+                            + "\nThis ticket is added to your cart.");
+        } else {
+            System.out.println("You already have this ticket in your cart.");
+        }
+        selected = new Ticket(null, 0, 0, 0);
     }
 
     // EFFECTS: count how many tickets in the cart

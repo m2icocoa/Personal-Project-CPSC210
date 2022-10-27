@@ -16,11 +16,11 @@ public class TestMyCart {
     public void runBefore() {
         testMyCart = new MyCart();
         firstTicket =
-                new Ticket("lower", 100, 1, 1, 120.0);
+                new Ticket("lower", 100, 1, 1);
         secondTicket =
-                new Ticket("upper", 201, 15, 9, 80.8);
+                new Ticket("upper", 201, 15, 9);
         thirdTicket  =
-                new Ticket("upper", 210, 20, 20, 50.7);
+                new Ticket("upper", 210, 20, 20);
     }
 
     @Test
@@ -87,13 +87,13 @@ public class TestMyCart {
 
     @Test
     private void checkMyCartDoesNotContainTicket(Ticket ticket) {
-        assertFalse(testMyCart.contains(ticket));
+        assertFalse(testMyCart.ifContains(ticket));
     }
 
     @Test
     private void checkMyCartContainsTicket(Ticket ticket) {
         assertTrue(testMyCart.quantity() > 0);
-        assertTrue(testMyCart.contains(ticket));
+        assertTrue(testMyCart.ifContains(ticket));
     }
 
     @Test

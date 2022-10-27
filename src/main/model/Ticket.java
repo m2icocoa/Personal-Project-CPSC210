@@ -18,12 +18,11 @@ public class Ticket {
     //          seatRow is set to row
     //          seatNumber is set to number
     //          and seatPrice is set to price
-    public Ticket(String seatLevel, int seatSection, int seatRow, int seatNumber, double seatPrice) {
+    public Ticket(String seatLevel, int seatSection, int seatRow, int seatNumber) {
         level = seatLevel;
         section = seatSection;
         row = seatRow;
         number = seatNumber;
-        price = seatPrice;
     }
 
     // EFFECTS: assigns seatLevel to level

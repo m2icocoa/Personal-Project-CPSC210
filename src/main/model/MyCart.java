@@ -14,23 +14,23 @@ public class MyCart {
     // MODIFIES: this
     // EFFECTS: adds a ticket into my cart unless it's already there, in which case do nothing
     public void addTicket(Ticket ticket) {
-        //if (!cart.contains(ticket)) {
-        cart.add(ticket);
-        //}
+        if (!ifContains(ticket)) {
+            cart.add(ticket);
+        }
     }
 
     // MODIFIES: this
     // EFFECTS: if the ticket is in my cart, then remove it from my cart.
     //          Otherwise, do nothing.
     public void removeTicket(Ticket ticket) {
-        //if (cart.contains(ticket)) {
-        cart.remove(ticket);
-        //}
+        if (ifContains(ticket)) {
+            cart.remove(ticket);
+        }
     }
 
     // EFFECTS: if the ticket is in my cart, return true,
     //          otherwise, return false.
-    public boolean contains(Ticket ticket) {
+    public boolean ifContains(Ticket ticket) {
         return cart.contains(ticket);
     }
 

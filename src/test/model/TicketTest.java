@@ -66,4 +66,9 @@ class TicketTest {
         testTicket.assignPrice("hello", 10);
         assertEquals(0.0, testTicket.getPrice());
     }
+
+    @Test
+    public void testToString() {
+        assertEquals("Level: upper, Section: 200, Row: 1, Number: 10, Price: $50.5", testTicket.toString());
+    }
 }

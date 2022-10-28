@@ -84,11 +84,11 @@ public class Ticket implements Writable {
 
     // EFFECTS: returns string representation of this ticket
     public String toString() {
-        return "Level:" + level + ", "
+        return "Level: " + level + ", "
                 + "Section: " + section + ", "
-                + "Row:" + row + ", "
-                + "Number:" + number + ", "
-                + "Price:" + price;
+                + "Row: " + row + ", "
+                + "Number: " + number + ", "
+                + "Price: $" + price;
     }
 
     @Override

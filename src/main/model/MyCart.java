@@ -1,13 +1,19 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 
 // Represents my cart with tickets selected
-public class MyCart {
+public class MyCart implements Writable {
+    private String name;
     ArrayList<Ticket> cart;
 
     // EFFECTS: constructs an empty cart
-    public MyCart() {
+    public MyCart(String name) {
+        this.name = name;
         this.cart = new ArrayList<>();
     }
 
@@ -80,6 +86,10 @@ public class MyCart {
         return cart.get(num - 1).getPrice();
     }
 
+    public String getName() {
+        return name;
+    }
+
     // EFFECTS: if the cart contains at least one ticket, returns the total price of tickets in my cart,
     //          otherwise, returns $0.0
     public double totalPrice() {
@@ -92,5 +102,25 @@ public class MyCart {
         }
         return priceSum;
     }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("tickets", myCartToJason());
+        return json;
+    }
+
+    // EFFECTS: returns things in this cart as a JSON array
+    private JSONArray myCartToJason() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Ticket c : cart) {
+            jsonArray.put(c.toJson());
+        }
+
+        return jsonArray;
+    }
+
 }
 

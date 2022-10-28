@@ -1,7 +1,10 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 // Represents a ticket with seat level, section, row, number and price (in dollars)
-public class Ticket {
+public class Ticket implements Writable {
     private String level;       // seat level
     private int section;        // seat section
     private int row;            // seat row in the section
@@ -77,6 +80,17 @@ public class Ticket {
 
     public double getPrice() {
         return price;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("level", level);
+        json.put("section", section);
+        json.put("row", row);
+        json.put("number", number);
+        json.put("price", price);
+        return json;
     }
 }
 

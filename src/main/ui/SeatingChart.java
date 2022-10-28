@@ -2,18 +2,30 @@ package ui;
 
 import model.MyCart;
 import model.Ticket;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 // Seating Chart Application
 public class SeatingChart {
+    private static final String JSON_STORE = "./data/my-cart.json";
     private MyCart myCart;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
     private Scanner input;
     private Ticket selected =
             new Ticket(null, 0, 0, 0, 0.0);
 
-    // EFFECTS: runs the seating chart
-    public SeatingChart() {
+
+    // EFFECTS: constructs seating chart and runs application
+    public SeatingChart() throws FileNotFoundException {
+        input = new Scanner(System.in);
+        myCart = new MyCart("Mii's cart");
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         runSeatingChart();
     }
 
@@ -22,9 +34,9 @@ public class SeatingChart {
     private void runSeatingChart() {
 
         boolean keepGoing = true;
-        String command;
+        String command = null;
 
-        init();
+        //init();
 
         while (keepGoing) {
             displayMenu();
@@ -187,13 +199,13 @@ public class SeatingChart {
         System.out.println("Total price: $" + myCart.totalPrice());
     }
 
-    // MODIFIES: this
-    // EFFECTS: initializes my cart
-    private void init() {
-        myCart = new MyCart();
-        input = new Scanner(System.in);
-        input.useDelimiter("\n");
-    }
+//    // MODIFIES: this
+//    // EFFECTS: initializes my cart
+//    private void init() {
+//        myCart = new MyCart();
+//        input = new Scanner(System.in);
+//        input.useDelimiter("\n");
+//    }
 
     // EFFECTS: displays menu of options to user
     private void displayMenu() {
@@ -209,5 +221,28 @@ public class SeatingChart {
         System.out.println("\nWould you like to add this ticket to your cart?");
         System.out.println("\ty -> yes");
         System.out.println("\tn -> no");
+    }
+
+    // EFFECTS: saves the cart to file
+    private void saveMyCart() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(myCart);
+            jsonWriter.close();
+            System.out.println("Saved " + myCart.getName() + " to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads the cart from file
+    private void loadWorkRoom() {
+        try {
+            myCart = jsonReader.read();
+            System.out.println("Loaded " + myCart.getName() + " from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
     }
 }

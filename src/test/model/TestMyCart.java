@@ -16,7 +16,7 @@ public class TestMyCart {
 
     @BeforeEach
     public void runBefore() {
-        testMyCart = new MyCart();
+        testMyCart = new MyCart("Mii's cart");
         ticketOne =
                 new Ticket("lower", 100, 1, 1, 120.0);
         ticketTwo =

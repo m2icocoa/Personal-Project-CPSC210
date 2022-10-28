@@ -239,6 +239,7 @@ public class SeatingChart {
         }
     }
 
+
     // EFFECTS: saves the cart to file
     private void saveMyCart() {
         try {

@@ -82,6 +82,15 @@ public class Ticket implements Writable {
         return price;
     }
 
+    // EFFECTS: returns string representation of this ticket
+    public String toString() {
+        return "Level:" + level + ", "
+                + "Section: " + section + ", "
+                + "Row:" + row + ", "
+                + "Number:" + number + ", "
+                + "Price:" + price;
+    }
+
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();

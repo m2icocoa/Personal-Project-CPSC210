@@ -10,7 +10,7 @@ import java.util.List;
 
 // Represents my cart with tickets selected
 public class MyCart implements Writable {
-    private String name;
+    private final String name;
     ArrayList<Ticket> cart;
 
     // EFFECTS: constructs an empty cart

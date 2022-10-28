@@ -1,11 +1,12 @@
 package model;
 
+import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import persistence.JsonTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-//
 class TicketTest {
     protected Ticket testTicket;
 

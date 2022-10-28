@@ -31,7 +31,7 @@ public class SeatingChart {
             command = input.next();
             command = command.toLowerCase();
 
-            if (command.equals("t")) {
+            if (command.equals("q")) {
                 keepGoing = false;
             } else {
                 processCommand(command);
@@ -201,7 +201,7 @@ public class SeatingChart {
         System.out.println("\ts -> select a ticket");
         System.out.println("\tn -> check the number of tickets in your cart");
         System.out.println("\tp -> check the total price of tickets in your cart");
-        System.out.println("\tt -> terminate this system");
+        System.out.println("\tq -> quit");
     }
 
     // EFFECTS: displays a question where a user wants to add or remove the selected ticket from the cart

@@ -20,14 +20,16 @@ Thus, I decided to create a system where we buy concert tickets hoping that BTS 
 - As a user, I want to be able to know the price of the selected seat depending on how close it is to the stage.
 - As a user, I want to be able to put a ticket to my cart.
 - As a user, I want to be able to check the number of tickets in my cart.
-- As a user, I want to be able to check the total price of tickets in my cart.
-
+- As a user, I want to be able to check the total price of tickets in my cart. 
+- As a user, when I select the quit option from the application menu, 
+- I want to be reminded to save my cart to file and have the option to do so or not.
+- As a user, when I start the application, I want to be given the option to load my cart from file.
 
 ## Potential Future User Stories
 If I have time to do more...
 - As a user, I want to be able to remove a ticket from my cart.
 - As a user, I want to be able to select the date and time of the concert.
-- As a user, I want to be able to see if the desired ticket is still available or already sold out.
+- As a user, I want to be able to see if the selected ticket is still available or already sold out.
 - As a user, I want to be able not to exceed the maximum number of tickets I can purchase.
 - As a user, I want to be able to select a ticket whose price is lower than or equal to my budget.
 - As a user, I want to be able to get a discount by using my membership status.

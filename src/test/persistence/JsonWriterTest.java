@@ -48,7 +48,7 @@ public class JsonWriterTest extends JsonTest {
             MyCart mc = new MyCart("Yuki's cart");
             mc.addTicket(new Ticket("lower", 100, 12, 12, 100.0));
             mc.addTicket(new Ticket("upper", 201,1,1,99.9));
-            JsonWriter writer = new JsonWriter("./data/testWriterGeneralCartaa.json");
+            JsonWriter writer = new JsonWriter("./data/testWriterGeneralCart.json");
             writer.open();
             writer.write(mc);
             writer.close();

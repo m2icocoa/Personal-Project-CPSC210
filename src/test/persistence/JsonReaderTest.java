@@ -51,6 +51,4 @@ public class JsonReaderTest extends JsonTest{
             fail("Couldn't read from file");
         }
     }
-
-
 }

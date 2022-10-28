@@ -28,12 +28,12 @@ public class JsonWriterTest extends JsonTest {
     void testWriterEmptyCart() {
         try {
             MyCart mc = new MyCart("Yuki's cart");
-            JsonWriter writer = new JsonWriter("./data/testWriterEmptyMyCart.json");
+            JsonWriter writer = new JsonWriter("./data/testWriterEmptyCart.json");
             writer.open();
             writer.write(mc);
             writer.close();
 
-            JsonReader reader = new JsonReader("./data/testWriterEmptyMyCart.json");
+            JsonReader reader = new JsonReader("./data/testWriterEmptyCart.json");
             mc = reader.read();
             assertEquals("Yuki's cart", mc.getName());
             assertEquals(0, mc.quantity());
@@ -48,7 +48,7 @@ public class JsonWriterTest extends JsonTest {
             MyCart mc = new MyCart("Yuki's cart");
             mc.addTicket(new Ticket("lower", 100, 12, 12, 100.0));
             mc.addTicket(new Ticket("upper", 201,1,1,99.9));
-            JsonWriter writer = new JsonWriter("./data/testWriterGeneralCart.json");
+            JsonWriter writer = new JsonWriter("./data/testWriterGeneralCartaa.json");
             writer.open();
             writer.write(mc);
             writer.close();

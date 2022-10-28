@@ -1,0 +1,19 @@
+{
+    "tickets": [
+        {
+            "number": 12,
+            "level": "lower",
+            "price": 100,
+            "section": 100,
+            "row": 12
+        },
+        {
+            "number": 1,
+            "level": "upper",
+            "price": 99.9,
+            "section": 201,
+            "row": 1
+        }
+    ],
+    "name": "Yuki's cart"
+}

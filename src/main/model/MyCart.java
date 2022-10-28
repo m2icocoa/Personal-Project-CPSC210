@@ -118,7 +118,7 @@ public class MyCart implements Writable {
         return json;
     }
 
-    // EFFECTS: returns things in this cart as a JSON array
+    // EFFECTS: returns tickets in this cart as a JSON array
     private JSONArray myCartToJason() {
         JSONArray jsonArray = new JSONArray();
 

@@ -5,6 +5,8 @@ import org.json.JSONObject;
 import persistence.Writable;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 // Represents my cart with tickets selected
 public class MyCart implements Writable {
@@ -23,6 +25,11 @@ public class MyCart implements Writable {
         if (!ifContains(ticket)) {
             cart.add(ticket);
         }
+    }
+
+    // EFFECTS: returns an unmodifiable list of tickets in this cart
+    public List<Ticket> getTickets() {
+        return Collections.unmodifiableList(cart);
     }
 
     // MODIFIES: this

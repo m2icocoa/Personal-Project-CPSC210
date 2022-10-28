@@ -7,6 +7,8 @@ import persistence.JsonWriter;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
 
 // Seating Chart Application
@@ -34,7 +36,7 @@ public class SeatingChart {
     private void runSeatingChart() {
 
         boolean keepGoing = true;
-        String command = null;
+        String command;
 
         //init();
 
@@ -52,22 +54,24 @@ public class SeatingChart {
         System.out.println("\nSee you next time!");
     }
 
+
     // MODIFIES: this
     // EFFECTS: processes user command
     private void processCommand(String command) {
-        switch (command) {
-            case "s":
-                doSelect();
-                break;
-            case "n":
-                checkHowManyTickets();
-                break;
-            case "p":
-                checkTotalPrice();
-                break;
-            default:
-                System.out.println("Invalid selection.");
-                break;
+        if (command.equals("c")) {
+            doSelect();
+        } else if (command.equals("n")) {
+            checkHowManyTickets();
+        } else if (command.equals("t")) {
+            checkTotalPrice();
+        } else if (command.equals("p")) {
+            printMyCart();
+        } else if (command.equals("s")) {
+            saveMyCart();
+        } else if (command.equals("l")) {
+            loadMyCart();
+        } else {
+            System.out.println("Selection not valid...");
         }
     }
 
@@ -210,9 +214,12 @@ public class SeatingChart {
     // EFFECTS: displays menu of options to user
     private void displayMenu() {
         System.out.println("\nMain Menu:");
-        System.out.println("\ts -> select a ticket");
+        System.out.println("\tc-> choose a ticket");
         System.out.println("\tn -> check the number of tickets in your cart");
-        System.out.println("\tp -> check the total price of tickets in your cart");
+        System.out.println("\tt -> check the total price of tickets in your cart");
+        System.out.println("\tp -> print tickets");
+        System.out.println("\ts -> save my cart to file");
+        System.out.println("\tl -> load my cart from file");
         System.out.println("\tq -> quit");
     }
 
@@ -221,6 +228,15 @@ public class SeatingChart {
         System.out.println("\nWould you like to add this ticket to your cart?");
         System.out.println("\ty -> yes");
         System.out.println("\tn -> no");
+    }
+
+    // EFFECTS: prints all the tickets in my cart to the console
+    private void printMyCart() {
+        List<Ticket> tickets = myCart.getTickets();
+
+        for (Ticket mc : tickets) {
+            System.out.println(mc);
+        }
     }
 
     // EFFECTS: saves the cart to file
@@ -237,7 +253,7 @@ public class SeatingChart {
 
     // MODIFIES: this
     // EFFECTS: loads the cart from file
-    private void loadWorkRoom() {
+    private void loadMyCart() {
         try {
             myCart = jsonReader.read();
             System.out.println("Loaded " + myCart.getName() + " from " + JSON_STORE);

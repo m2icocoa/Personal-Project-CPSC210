@@ -8,24 +8,10 @@
             "row": 12
         },
         {
-            "number": 8,
-            "level": "upper",
-            "price": 107,
-            "section": 205,
-            "row": 6
-        },
-        {
-            "number": 20,
-            "level": "lower",
-            "price": 102,
-            "section": 110,
-            "row": 23
-        },
-        {
             "number": 12,
             "level": "upper",
             "price": 98,
-            "section": 200,
+            "section": 201,
             "row": 12
         }
     ],

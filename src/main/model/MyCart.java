@@ -32,14 +32,14 @@ public class MyCart implements Writable {
         return Collections.unmodifiableList(cart);
     }
 
-//    // MODIFIES: this
-//    // EFFECTS: if the ticket is in my cart, then remove it from my cart,
-//    //          otherwise, do nothing
-//    public void removeTicket(Ticket ticket) {
-//        if (ifContains(ticket)) {
-//            cart.remove(ticket);
-//        }
-//    }
+    // MODIFIES: this
+    // EFFECTS: if the ticket is in my cart, then remove it from my cart,
+    //          otherwise, do nothing
+    public void removeTicket(Ticket ticket) {
+        if (ifContains(ticket)) {
+            cart.remove(ticket);
+        }
+    }
 
     // EFFECTS: if the exact same ticket is in my cart, return true,
     //          otherwise, return false

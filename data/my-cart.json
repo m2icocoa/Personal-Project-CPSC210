@@ -8,18 +8,25 @@
             "row": 12
         },
         {
-            "number": 2,
+            "number": 8,
             "level": "upper",
-            "price": 111.5,
-            "section": 203,
-            "row": 3
+            "price": 107,
+            "section": 205,
+            "row": 6
         },
         {
-            "number": 3,
+            "number": 20,
             "level": "lower",
-            "price": 138,
-            "section": 104,
-            "row": 5
+            "price": 102,
+            "section": 110,
+            "row": 23
+        },
+        {
+            "number": 12,
+            "level": "upper",
+            "price": 98,
+            "section": 200,
+            "row": 12
         }
     ],
     "name": "Mii's cart"

@@ -7,7 +7,6 @@ import persistence.JsonWriter;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
@@ -75,7 +74,7 @@ public class SeatingChart {
         }
     }
 
-    // conducts a seat selection
+    // EFFECTS: conducts a seat selection
     private void doSelect() {
         selectLevel();
         selectSection();
@@ -86,7 +85,7 @@ public class SeatingChart {
         addOrDoNothing();
     }
 
-    // EFFECTS: conducts add or remove
+    // EFFECTS: conducts addition of a ticket
     private void addOrDoNothing() {
         String command = input.next();
         command = command.toLowerCase();
@@ -115,7 +114,7 @@ public class SeatingChart {
     }
 
     // MODIFIES: this
-    // EFFECTS: if seatSection is either [100, 110] or [200, 210], conducts a seat section selection
+    // EFFECTS: if seatSection is either [100, 110] or [200, 210], conducts a seat section selection,
     //          otherwise says the input is invalid
     private void selectSection() {
         if (selected.getLevel().equals("lower")) {
@@ -142,7 +141,7 @@ public class SeatingChart {
     }
 
     // MODIFIES: this
-    // EFFECTS: if seatRow is [1, 23], assigns it to row, conducts a seat row selection
+    // EFFECTS: if seatRow is [1, 23], assigns it to row, conducts a seat row selection,
     //          otherwise says the input is invalid
     private void selectRow() {
         System.out.println("Enter the seat row you prefer from 1 to 23.");
@@ -174,7 +173,7 @@ public class SeatingChart {
                 + " Dollars");
     }
 
-    // EFFECTS: add the preferred seat to the cart
+    // EFFECTS: adds the preferred seat to the cart
     private void addSeatToMyCart() {
         if (!myCart.ifContains(selected)) {
             myCart.addTicket(selected);
@@ -189,7 +188,7 @@ public class SeatingChart {
         selected = new Ticket(null, 0, 0, 0,0.0);
     }
 
-    // EFFECTS: count how many tickets in the cart
+    // EFFECTS: counts how many tickets in the cart
     private void checkHowManyTickets() {
         if (myCart.quantity() == 0 || myCart.quantity() == 1) {
             System.out.println("You have " + myCart.quantity() + " ticket in your cart.");
@@ -198,7 +197,7 @@ public class SeatingChart {
         }
     }
 
-    // EFFECTS: calculate the total price of tickets in the cart
+    // EFFECTS: calculates the total price of tickets in the cart
     private void checkTotalPrice() {
         System.out.println("Total price: $" + myCart.totalPrice());
     }
@@ -238,7 +237,6 @@ public class SeatingChart {
             System.out.println(mc);
         }
     }
-
 
     // EFFECTS: saves the cart to file
     private void saveMyCart() {

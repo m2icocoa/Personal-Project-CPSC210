@@ -164,6 +164,11 @@ public class TestMyCart {
     }
 
     @Test
+    public void testGetName() {
+        assertEquals("Mii's cart", testMyCart.getName());
+    }
+
+    @Test
     public void testTotalPriceEmptyCart() {
         assertEquals(0, testMyCart.quantity());
         assertEquals(0.0, testMyCart.totalPrice());

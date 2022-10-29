@@ -93,6 +93,7 @@ public class MyCart implements Writable {
         return cart.get(num - 1).getPrice();
     }
 
+    // EFFECTS: return the name of my cart
     public String getName() {
         return name;
     }

@@ -22,7 +22,7 @@ Thus, I decided to create a system where we buy concert tickets hoping that BTS 
 - As a user, I want to be able to check the number of tickets in my cart.
 - As a user, I want to be able to check the total price of tickets in my cart. 
 - As a user, when I select the quit option from the application menu, 
-- I want to be reminded to save my cart to file and have the option to do so or not.
+I want to be reminded to save my cart to file and have the option to do so or not.
 - As a user, when I start the application, I want to be given the option to load my cart from file.
 
 ## Potential Future User Stories

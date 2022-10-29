@@ -101,6 +101,8 @@ public class Ticket implements Writable {
         json.put("price", price);
         return json;
     }
+    // Method above were taken from Thingy in:
+    // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
 }
 
 

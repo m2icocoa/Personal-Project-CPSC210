@@ -15,6 +15,8 @@ Moreover, they no longer hold a concert in small arenas like the one at UBC,
 but only in huge stadiums.
 Thus, I decided to create a system where we buy concert tickets hoping that BTS will come to UBC to perform one day.
 
+
+
 ## User Stories
 - As a user, I want to be able to select a ticket.
 - As a user, I want to be able to know the price of the selected seat depending on how close it is to the stage.
@@ -34,3 +36,6 @@ If I have time to do more...
 - As a user, I want to be able to select a ticket whose price is lower than or equal to my budget.
 - As a user, I want to be able to get a discount by using my membership status.
 - As a user, I want to be able to select and add a light stick (ARMY Bomb) to my cart. 
+
+Some methods in this project are cited from:
+https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git

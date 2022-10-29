@@ -52,3 +52,6 @@ public class JsonReaderTest extends JsonTest{
         }
     }
 }
+
+// Methods above were taken from JsonReaderTest in:
+// https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git

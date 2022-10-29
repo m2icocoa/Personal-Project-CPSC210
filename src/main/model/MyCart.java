@@ -119,6 +119,10 @@ public class MyCart implements Writable {
         return json;
     }
 
+    // Method above were taken from WorkRoom in:
+    // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
+
+
     // EFFECTS: returns tickets in this cart as a JSON array
     private JSONArray myCartToJason() {
         JSONArray jsonArray = new JSONArray();
@@ -129,6 +133,7 @@ public class MyCart implements Writable {
 
         return jsonArray;
     }
-
+    // Method above were taken from WorkRoom in:
+    // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
 }
 

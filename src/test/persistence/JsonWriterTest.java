@@ -66,3 +66,6 @@ public class JsonWriterTest extends JsonTest {
         }
     }
 }
+
+// Methods above were taken from JsonWriterTest in:
+// https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git

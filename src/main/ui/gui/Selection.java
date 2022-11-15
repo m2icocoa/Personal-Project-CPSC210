@@ -1,11 +1,10 @@
 package ui.gui;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class Selection {
+    private static JFrame frame;
+    protected static JPanel panel;
     private static JLabel levelSelected;
     private static JTextField levelText;
     private static JLabel sectionSelected;
@@ -15,14 +14,14 @@ public class Selection {
     private static JLabel numberSelected;
     private static JTextField numberText;
     private static JButton button;
-    private static JLabel success;
 
     public Selection() {
-        JFrame frame = new JFrame();
-        JPanel panel = new JPanel();
+        frame = new JFrame();
+        panel = new JPanel();
 
         frame.setSize(1000, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setTitle("Selection");
         frame.setVisible(true);
         frame.add(panel);
 
@@ -64,15 +63,16 @@ public class Selection {
         button.setBounds(10,140,80,25);
         panel.add(button);
 
-        success = new JLabel("");
-        success.setBounds(10,110,300,25);
-        panel.add(success);
+        ImageIcon seatingChart = new ImageIcon("chart.png");
+        JLabel chart = new JLabel(seatingChart);
+        chart.setBounds(100,20,500,500);
+        panel.add(chart);
 
         frame.setVisible(true);
     }
 
-
     public static void main(String[] args) {
         new Selection();
+        frame.setVisible(true);
     }
 }

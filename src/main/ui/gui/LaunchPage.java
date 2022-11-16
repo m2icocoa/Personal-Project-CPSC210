@@ -4,14 +4,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 
 
 public class LaunchPage implements ActionListener {
     JFrame frame = new JFrame("Main Menu");
     JButton selectionButton = new JButton("Select tickets");
     JButton removalButton = new JButton("Remove tickets");
-    JButton viewCart = new JButton("View my cart");
     JButton viewPrice = new JButton("View total price");
+    JButton quit = new JButton("Quit");
 
     LaunchPage() {
         selectionButton.setBounds(10,10,200,100);
@@ -22,18 +23,18 @@ public class LaunchPage implements ActionListener {
         removalButton.setAlignmentX(Component.LEFT_ALIGNMENT);
         removalButton.addActionListener(this);
 
-        viewCart.setBounds(10,210,200,100);
-        viewCart.setAlignmentX(Component.LEFT_ALIGNMENT);
-        viewCart.addActionListener(this);
-
-        viewPrice.setBounds(10,310,200,100);
+        viewPrice.setBounds(10,210,200,100);
         viewPrice.setAlignmentX(Component.LEFT_ALIGNMENT);
         viewPrice.addActionListener(this);
 
+        quit.setBounds(10,310,200,100);
+        quit.setAlignmentX(Component.LEFT_ALIGNMENT);
+        quit.addActionListener(this);
+
         frame.add(selectionButton);
         frame.add(removalButton);
-        frame.add(viewCart);
         frame.add(viewPrice);
+        frame.add(quit);
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1000,600);
@@ -48,10 +49,13 @@ public class LaunchPage implements ActionListener {
             Selection mySelection = new Selection();
         } else if (e.getSource() == removalButton) {
             Removal myRemoval = new Removal();
-        } else if (e.getSource() == viewCart) {
-            ViewCart myCart = new ViewCart();
-        } else {
+        } else if (e.getSource() == viewPrice) {
             ViewPrice myPrice = new ViewPrice();
+        } else {
+            JOptionPane.showConfirmDialog(null, "Do you want to save your data?", null,
+                    JOptionPane.YES_NO_OPTION);
+            frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
         }
     }
+
 }

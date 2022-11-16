@@ -7,6 +7,5 @@ public class Main {
         JOptionPane.showConfirmDialog(null,
                 "Do you want to load your previous data?", null, JOptionPane.YES_NO_OPTION);
         LaunchPage launchPage = new LaunchPage();
-
     }
 }

@@ -106,6 +106,3 @@ public class Selection implements ActionListener {
         }
     }
 }
-
-//JOptionPane.showConfirmDialog(null,
-//        "Do you want to save your data?", null, JOptionPane.YES_NO_OPTION);

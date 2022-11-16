@@ -74,23 +74,17 @@ public class Selection implements ActionListener {
         if (!level.equals("lower") && !level.equals("upper")) {
             JOptionPane.showMessageDialog(null, "You entered an invalid level.", "Invalid",
                     JOptionPane.ERROR_MESSAGE);
-        }
-
-        if ((level.equals("lower") && !(section >= 100 && section <= 110))
+        } else if ((level.equals("lower") && !(section >= 100 && section <= 110))
                 || (level.equals("upper") && !(section >= 200 && section <= 210))
                 || (section > 110 && section < 200)
                 || (section < 100)
                 || (section > 210)) {
             JOptionPane.showMessageDialog(null, "You entered an invalid section.", "Invalid",
                     JOptionPane.ERROR_MESSAGE);
-        }
-
-        if (!(row >= 1 && row <= 23)) {
+        } else if (!(row >= 1 && row <= 23)) {
             JOptionPane.showMessageDialog(null, "You entered an invalid row.", "Invalid",
                     JOptionPane.ERROR_MESSAGE);
-        }
-
-        if (!(number >= 1 && number <= 20)) {
+        } else if (!(number >= 1 && number <= 20)) {
             JOptionPane.showMessageDialog(null, "You entered an invalid number.", "Invalid",
                     JOptionPane.ERROR_MESSAGE);
         } else {
@@ -99,8 +93,8 @@ public class Selection implements ActionListener {
             JLabel text = new JLabel("The ticket is successfully added to your cart. See you at the concert!");
             JPanel panel = new JPanel();
             panel.setLayout(new BorderLayout());
-            panel.add(icon,BorderLayout.CENTER);
-            panel.add(text,BorderLayout.NORTH);
+            panel.add(icon, BorderLayout.CENTER);
+            panel.add(text, BorderLayout.NORTH);
             JOptionPane.showMessageDialog(null, panel, "Successful",
                     JOptionPane.PLAIN_MESSAGE);
         }

@@ -53,9 +53,9 @@ public class Ticket implements Writable {
     // EFFECTS: return the price of seats depending on its level and the row number
     public double assignPrice(String seatLevel, int seatRow) {
         if (seatLevel.equals("lower")) {
-            price = 100.0 + 2.0 * (23.0 + 1.0 - seatRow);
+            price = 50.0 + 2.5 * (23.0 + 1.0 - seatRow);
         } else if (seatLevel.equals("upper")) {
-            price = 80.0 + 1.5 * (23.0 + 1.0 - seatRow);
+            price = 50.0 + 1.5 * (23.0 + 1.0 - seatRow);
         } else {
             price = 0.0;
         }

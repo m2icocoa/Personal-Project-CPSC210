@@ -40,7 +40,6 @@ public class LaunchPage implements ActionListener {
         frame.setSize(1000,600);
         frame.setLayout(null);
         frame.setVisible(true);
-
     }
 
     @Override
@@ -57,5 +56,4 @@ public class LaunchPage implements ActionListener {
             frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
         }
     }
-
 }

@@ -18,75 +18,68 @@ public class Selection implements ActionListener, PropertyChangeListener {
 
     JFrame frame = new JFrame("Ticket Selection");
 
-    JLabel levelSelected = new JLabel("Level: ");
-    JLabel sectionSelected = new JLabel("Section: ");
-    JLabel rowSelected = new JLabel("Row: ");
-    JLabel numberSelected = new JLabel("Number: ");
-    JLabel priceSelected = new JLabel("Price: ");
+    JLabel levelLabel = new JLabel("Level: ");
+    JLabel sectionLabel = new JLabel("Section: ");
+    JLabel rowLabel = new JLabel("Row: ");
+    JLabel numberLabel = new JLabel("Number: ");
+    JLabel priceLabel = new JLabel("Price: ");
 
     //Formats to format and parse numbers
-    private MessageFormat levelFormat;
-    private NumberFormat sectionFormat;
-    private NumberFormat rowFormat;
-    private NumberFormat numberFormat;
-    private NumberFormat priceFormat;
-
+    private NumberFormat sectionFormat = NumberFormat.getNumberInstance();
+    private NumberFormat rowFormat = NumberFormat.getNumberInstance();
+    private NumberFormat numberFormat = NumberFormat.getNumberInstance();
+    private NumberFormat priceFormat = NumberFormat.getCurrencyInstance();
 
     //Fields for data entry
-    JFormattedTextField levelText = new JFormattedTextField(levelFormat);
+    JFormattedTextField levelText = new JFormattedTextField();
     JFormattedTextField sectionText = new JFormattedTextField(sectionFormat);
     JFormattedTextField rowText = new JFormattedTextField(rowFormat);
     JFormattedTextField numberText = new JFormattedTextField(numberFormat);
     JFormattedTextField priceText = new JFormattedTextField(priceFormat);
 
-
-
     JButton button = new JButton("Add to my cart");
 
-
-    @SuppressWarnings("checkstyle:MethodLength")
     public Selection() {
-        setUpFormats();
         double price = computePrice(level, row);
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1000,600);
+        frame.setSize(1500,1000);
         frame.setLayout(null);
 
-        levelSelected.setBounds(10,50,500,25);
-        frame.add(levelSelected);
+        levelLabel.setBounds(10,50,500,25);
+        frame.add(levelLabel);
 
         levelText.setBounds(100,50,165,25);
         levelText.addPropertyChangeListener("value", this);
         levelText.setValue(new String(level));
         frame.add(levelText);
 
-        sectionSelected.setBounds(10,80,80,25);
-        frame.add(sectionSelected);
+        sectionLabel.setBounds(10,80,80,25);
+        frame.add(sectionLabel);
 
         sectionText.setBounds(100,80,165,25);
         sectionText.addPropertyChangeListener("value", this);
         sectionText.setValue(new Integer(section));
         frame.add(sectionText);
 
-        rowSelected.setBounds(10,110,80,25);
-        frame.add(rowSelected);
+        rowLabel.setBounds(10,110,80,25);
+        frame.add(rowLabel);
 
         rowText.setBounds(100,110,165,25);
         rowText.addPropertyChangeListener("value", this);
         rowText.setValue(new Integer(row));
         frame.add(rowText);
 
-        numberSelected.setBounds(10,140,80,25);
-        frame.add(numberSelected);
+        numberLabel.setBounds(10,140,80,25);
+        frame.add(numberLabel);
 
         numberText.setBounds(100,140,165,25);
         numberText.addPropertyChangeListener("value", this);
         numberText.setValue(new Integer(number));
         frame.add(numberText);
 
-        priceSelected.setBounds(10,170,80,25);
-        frame.add(priceSelected);
+        priceLabel.setBounds(10,170,80,25);
+        frame.add(priceLabel);
 
         priceText.setBounds(100,170,165,25);
         priceText.addPropertyChangeListener("value", this);
@@ -96,11 +89,11 @@ public class Selection implements ActionListener, PropertyChangeListener {
         frame.add(priceText);
 
         //Tell accessibility tools about label/textfield pairs.
-        levelSelected.setLabelFor(levelText);
-        sectionSelected.setLabelFor(sectionText);
-        rowSelected.setLabelFor(rowText);
-        numberSelected.setLabelFor(numberText);
-        priceSelected.setLabelFor(priceText);
+        levelLabel.setLabelFor(levelText);
+        sectionLabel.setLabelFor(sectionText);
+        rowLabel.setLabelFor(rowText);
+        numberLabel.setLabelFor(numberText);
+        priceLabel.setLabelFor(priceText);
 
         button.setBounds(10,200,200,25);
         button.addActionListener(this);
@@ -211,15 +204,6 @@ public class Selection implements ActionListener, PropertyChangeListener {
             answer = 0.0;
         }
         return answer;
-    }
-
-    //Create and set up number formats. These objects also
-    //parse numbers input by user.
-    private void setUpFormats() {
-        sectionFormat = NumberFormat.getNumberInstance();
-        rowFormat = NumberFormat.getNumberInstance();
-        numberFormat = NumberFormat.getNumberInstance();
-        priceFormat = NumberFormat.getCurrencyInstance();
     }
 }
 

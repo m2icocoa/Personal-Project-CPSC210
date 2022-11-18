@@ -1,6 +1,7 @@
 package ui.gui;
 
 import model.MyCart;
+import model.Ticket;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
@@ -16,6 +17,8 @@ import java.beans.PropertyChangeListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Selection implements ActionListener, PropertyChangeListener {
 
@@ -289,6 +292,7 @@ public class Selection implements ActionListener, PropertyChangeListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+
         if (e.getActionCommand().equals("Load")) {
             load();
         } else if (e.getActionCommand().equals("Add")) {
@@ -332,6 +336,9 @@ public class Selection implements ActionListener, PropertyChangeListener {
                 panel.add(text, BorderLayout.NORTH);
                 JOptionPane.showMessageDialog(null, panel, "Successful",
                         JOptionPane.PLAIN_MESSAGE);
+
+                Ticket ticket = new Ticket(level, section, row, number, (Double) priceText.getValue());
+                myCart.addTicket(ticket);
             }
         } else if (e.getActionCommand().equals("Save")) {
             save();
@@ -393,12 +400,19 @@ public class Selection implements ActionListener, PropertyChangeListener {
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);
         }
+
+        List<Ticket> tickets = myCart.getTickets();
+
+        for (Ticket mc : tickets) {
+            System.out.println(mc);
+        }
     }
 
     // EFFECTS: close the frame
     private void quit() {
         frame.dispose();
     }
+
 }
 
 

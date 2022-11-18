@@ -222,7 +222,7 @@ public class SeatingChart {
         System.out.println("\tq -> quit");
     }
 
-    // EFFECTS: displays a question where a user wants to add or remove the selected ticket from the cart
+    // EFFECTS: displays a question where a user wants to add the selected ticket from the cart
     private void displayAddOrDoNothing() {
         System.out.println("\nWould you like to add this ticket to your cart?");
         System.out.println("\ty -> yes");

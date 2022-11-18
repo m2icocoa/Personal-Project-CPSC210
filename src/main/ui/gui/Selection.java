@@ -21,39 +21,35 @@ import java.util.List;
 
 public class Selection implements ActionListener, PropertyChangeListener {
 
-    // JSON
     private static final String JSON_STORE = "./data/my-cart.json";
     private MyCart myCart = new MyCart("Mii's cart");
     private JsonWriter jsonWriter = new JsonWriter(JSON_STORE);
     private JsonReader jsonReader = new JsonReader(JSON_STORE);
 
-    // Frame
     JFrame frame = new JFrame("Ticket Selection");
-
-    // Table
     JTable table = new JTable();
+    DefaultTableModel model = new DefaultTableModel();
 
-    // Labels
+    // create an array of objects to set the row data
+    Object[] tableRow = new Object[5];
+
     private JLabel levelLabel = new JLabel("Level: ");
     private JLabel sectionLabel = new JLabel("Section: ");
     private JLabel rowLabel = new JLabel("Row: ");
     private JLabel numberLabel = new JLabel("Number: ");
     private JLabel priceLabel = new JLabel("Price: ");
 
-    //Formats to format and parse numbers
     private NumberFormat sectionFormat = NumberFormat.getNumberInstance();
     private NumberFormat rowFormat = NumberFormat.getNumberInstance();
     private NumberFormat numberFormat = NumberFormat.getNumberInstance();
     private NumberFormat priceFormat = NumberFormat.getCurrencyInstance();
 
-    //Fields for data entry
     JFormattedTextField levelText = new JFormattedTextField();
     JFormattedTextField sectionText = new JFormattedTextField(sectionFormat);
     JFormattedTextField rowText = new JFormattedTextField(rowFormat);
     JFormattedTextField numberText = new JFormattedTextField(numberFormat);
     JFormattedTextField priceText = new JFormattedTextField(priceFormat);
 
-    //Button
     JButton loadButton = new JButton("Load");
     JButton addButton = new JButton("Add");
     JButton quitButton = new JButton("Quit");
@@ -61,19 +57,12 @@ public class Selection implements ActionListener, PropertyChangeListener {
     JButton updateButton = new JButton("Update");
     JButton deleteButton = new JButton("Delete");
 
-    //Values for the fields
     private String level = "";
     private int section;
     private int row;
     private int number;
     private double price;
 
-    // create an array of objects to set the row data
-    Object[] tableRow = new Object[5];
-
-    DefaultTableModel model = new DefaultTableModel();
-
-    // Main
     public static void main(String[] args) {
         new Selection();
         //Schedule a job for the event dispatch thread:
@@ -87,46 +76,114 @@ public class Selection implements ActionListener, PropertyChangeListener {
         });
     }
 
-    // Everything
-    @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     public Selection() {
+        levelSetting();
+        sectionSetting();
+        rowSetting();
+        numberSetting();
+        priceSetting();
+
+        //Tell accessibility tools about label/textfield pairs.
+        levelLabel.setLabelFor(levelText);
+        sectionLabel.setLabelFor(sectionText);
+        rowLabel.setLabelFor(rowText);
+        numberLabel.setLabelFor(numberText);
+        priceLabel.setLabelFor(priceText);
+
+        loadButtonSetting();
+        saveButtonSetting();
+        quitButtonSetting();
+        addButtonSetting();
+        updateButtonSetting();
+        deleteButtonSetting();
+        chartSetting();
+        createTable();
+
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1500,1000);
         frame.setLayout(null);
+        frame.setVisible(true);
+    }
 
-        // Level
+    private void chartSetting() {
+        ImageIcon seatingChart = new ImageIcon(getClass().getResource("chart.png"));
+        JLabel chart = new JLabel();
+        chart.setIcon(seatingChart);
+        chart.setBounds(600,10,800,500);
+        frame.add(chart);
+    }
+
+    private void deleteButtonSetting() {
+        deleteButton.setBounds(300,130,100,40);
+        deleteButton.addActionListener(this);
+        deleteButton.setActionCommand("Delete");
+        frame.add(deleteButton);
+    }
+
+    private void updateButtonSetting() {
+        updateButton.setBounds(300,90,100,40);
+        updateButton.addActionListener(this);
+        updateButton.setActionCommand("Update");
+        frame.add(updateButton);
+    }
+
+    private void addButtonSetting() {
+        addButton.setBounds(300,50,100,40);
+        addButton.addActionListener(this);
+        addButton.setActionCommand("Add");
+        frame.add(addButton);
+    }
+
+    private void quitButtonSetting() {
+        quitButton.setBounds(190,10,100,25);
+        quitButton.addActionListener(this);
+        quitButton.setActionCommand("Quit");
+        frame.add(quitButton);
+    }
+
+    private void saveButtonSetting() {
+        saveButton.setBounds(100,10,100,25);
+        saveButton.addActionListener(this);
+        saveButton.setActionCommand("Save");
+        frame.add(saveButton);
+    }
+
+    private void loadButtonSetting() {
+        loadButton.setBounds(10,10,100,25);
+        loadButton.addActionListener(this);
+        loadButton.setActionCommand("Load");
+        frame.add(loadButton);
+    }
+
+    // Level
+    private void levelSetting() {
         levelLabel.setBounds(10,50,500,25);
         frame.add(levelLabel);
         levelText.setBounds(100,50,165,25);
         levelText.addPropertyChangeListener("value", this);
         levelText.setValue(new String(level));
         frame.add(levelText);
+    }
 
-        // Section
+    private void sectionSetting() {
         sectionLabel.setBounds(10,80,80,25);
         frame.add(sectionLabel);
         sectionText.setBounds(100,80,165,25);
         sectionText.addPropertyChangeListener("value", this);
         sectionText.setValue(new Integer(section));
         frame.add(sectionText);
+    }
 
-        // Row
+    private void rowSetting() {
         rowLabel.setBounds(10,110,80,25);
         frame.add(rowLabel);
         rowText.setBounds(100,110,165,25);
         rowText.addPropertyChangeListener("value", this);
         rowText.setValue(new Integer(row));
         frame.add(rowText);
+    }
 
-        // Number
-        numberLabel.setBounds(10,140,80,25);
-        frame.add(numberLabel);
-        numberText.setBounds(100,140,165,25);
-        numberText.addPropertyChangeListener("value", this);
-        numberText.setValue(new Integer(number));
-        frame.add(numberText);
-
-        // Price
+    private void priceSetting() {
         price = computePrice(level, row);
         priceLabel.setBounds(10,170,80,25);
         frame.add(priceLabel);
@@ -136,73 +193,24 @@ public class Selection implements ActionListener, PropertyChangeListener {
         priceText.setEditable(false);
         priceText.setForeground(Color.red);
         frame.add(priceText);
-
-        //Tell accessibility tools about label/textfield pairs.
-        levelLabel.setLabelFor(levelText);
-        sectionLabel.setLabelFor(sectionText);
-        rowLabel.setLabelFor(rowText);
-        numberLabel.setLabelFor(numberText);
-        priceLabel.setLabelFor(priceText);
-
-        // Load
-        loadButton.setBounds(10,10,100,25);
-        loadButton.addActionListener(this);
-        loadButton.setActionCommand("Load");
-        frame.add(loadButton);
-
-        // Save
-        saveButton.setBounds(100,10,100,25);
-        saveButton.addActionListener(this);
-        saveButton.setActionCommand("Save");
-        frame.add(saveButton);
-
-        // Quit
-        quitButton.setBounds(190,10,100,25);
-        quitButton.addActionListener(this);
-        quitButton.setActionCommand("Quit");
-        frame.add(quitButton);
-
-        // Add
-        addButton.setBounds(300,50,100,40);
-        addButton.addActionListener(this);
-        addButton.setActionCommand("Add");
-        frame.add(addButton);
-
-        // Update
-        updateButton.setBounds(300,90,100,40);
-        updateButton.addActionListener(this);
-        updateButton.setActionCommand("Update");
-        frame.add(updateButton);
-
-        // Delete
-        deleteButton.setBounds(300,130,100,40);
-        deleteButton.addActionListener(this);
-        deleteButton.setActionCommand("Delete");
-        frame.add(deleteButton);
-
-        // Chart
-        ImageIcon seatingChart = new ImageIcon(getClass().getResource("chart.png"));
-        JLabel chart = new JLabel();
-        chart.setIcon(seatingChart);
-        chart.setBounds(600,10,800,500);
-        frame.add(chart);
-
-        createTable();
-
-        // set everything visible
-        frame.setVisible(true);
     }
 
-    @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
+    private void numberSetting() {
+        numberLabel.setBounds(10,140,80,25);
+        frame.add(numberLabel);
+        numberText.setBounds(100,140,165,25);
+        numberText.addPropertyChangeListener("value", this);
+        numberText.setValue(new Integer(number));
+        frame.add(numberText);
+    }
+
     public void createTable() {
         // create a table model and set a Column Identifiers to this model
-        Object[] columns = {"Level","Section", "Row", "Number","Price"};
+        Object[] columns = {"Level", "Section", "Row", "Number", "Price"};
         model.setColumnIdentifiers(columns);
 
         // set the model to the table
         table.setModel(model);
-
-        // Change A JTable Background Color, Font Size, Font Color, Row Height
         table.setBackground(Color.LIGHT_GRAY);
         table.setForeground(Color.black);
         Font font = new Font("",1,22);
@@ -213,45 +221,12 @@ public class Selection implements ActionListener, PropertyChangeListener {
         JScrollPane pane = new JScrollPane(table);
         pane.setBounds(10, 300, 500, 400);
 
-        frame.setLayout(null);
-
         frame.add(pane);
+        getSelectedRowAction();
+    }
 
-        // button add row
-//        addButton.addActionListener(new ActionListener() {
-//
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//
-//                tableRow[0] = levelText.getText();
-//                tableRow[1] = sectionText.getText();
-//                tableRow[2] = rowText.getText();
-//                tableRow[3] = numberText.getText();
-//                tableRow[4] = priceText.getText();
-//
-//                // add row to the model
-//                model.addRow(tableRow);
-//            }
-//        });
-
-        // button remove row
-        deleteButton.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-                // i = the index of the selected row
-                int i = table.getSelectedRow();
-                if (i >= 0) {
-                    // remove a row from jtable
-                    model.removeRow(i);
-                } else {
-                    System.out.println("Delete Error");
-                }
-            }
-        });
-
-        // get selected row data From table to textfields
+    // EFFECTS: get selected row data From table to textfields
+    private void getSelectedRowAction() {
         table.addMouseListener(new MouseAdapter() {
 
             @Override
@@ -267,8 +242,9 @@ public class Selection implements ActionListener, PropertyChangeListener {
                 priceText.setText(model.getValueAt(i,4).toString());
             }
         });
+    }
 
-        // button update row
+    private void updateAction() {
         updateButton.addActionListener(new ActionListener() {
 
             @Override
@@ -290,63 +266,93 @@ public class Selection implements ActionListener, PropertyChangeListener {
         });
     }
 
+    private void deleteAction() {
+        deleteButton.addActionListener(new ActionListener() {
 
-    @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                // i = the index of the selected row
+                int i = table.getSelectedRow();
+                if (i >= 0) {
+                    // remove a row from jtable
+                    model.removeRow(i);
+                } else {
+                    System.out.println("Delete Error");
+                }
+            }
+        });
+    }
+
+    private void addAction() {
+        tableRow[0] = levelText.getText();
+        tableRow[1] = sectionText.getText();
+        tableRow[2] = rowText.getText();
+        tableRow[3] = numberText.getText();
+        tableRow[4] = priceText.getText();
+
+        // add row to the model
+        model.addRow(tableRow);
+    }
+
+
     @Override
     public void actionPerformed(ActionEvent e) {
+        String level = levelText.getText();
+        int section = Integer.parseInt(sectionText.getText());
+        int row = Integer.parseInt(rowText.getText());
+        int number = Integer.parseInt(numberText.getText());
 
-        if (e.getActionCommand().equals("Load")) {
-            load();
-        } else if (e.getActionCommand().equals("Add")) {
-            String level = levelText.getText();
-            int section = Integer.parseInt(sectionText.getText());
-            int row = Integer.parseInt(rowText.getText());
-            int number = Integer.parseInt(numberText.getText());
-
-            if (!level.equals("lower") && !level.equals("upper")) {
-                JOptionPane.showMessageDialog(null, "You entered an invalid level.", "Invalid",
-                        JOptionPane.ERROR_MESSAGE);
-            } else if ((level.equals("lower") && !(section >= 100 && section <= 110))
-                    || (level.equals("upper") && !(section >= 200 && section <= 210))
-                    || (section > 110 && section < 200)
-                    || (section < 100)
-                    || (section > 210)) {
-                JOptionPane.showMessageDialog(null, "You entered an invalid section.", "Invalid",
-                        JOptionPane.ERROR_MESSAGE);
-            } else if (!(row >= 1 && row <= 23)) {
-                JOptionPane.showMessageDialog(null, "You entered an invalid row.", "Invalid",
-                        JOptionPane.ERROR_MESSAGE);
-            } else if (!(number >= 1 && number <= 20)) {
-                JOptionPane.showMessageDialog(null, "You entered an invalid number.", "Invalid",
-                        JOptionPane.ERROR_MESSAGE);
-            } else {
-                tableRow[0] = levelText.getText();
-                tableRow[1] = sectionText.getText();
-                tableRow[2] = rowText.getText();
-                tableRow[3] = numberText.getText();
-                tableRow[4] = priceText.getText();
-
-                // add row to the model
-                model.addRow(tableRow);
-
-                ImageIcon bts = new ImageIcon(getClass().getResource("jin.png"));
-                JLabel icon = new JLabel(bts);
-                JLabel text = new JLabel("The ticket is successfully added to your cart. See you at the concert!");
-                JPanel panel = new JPanel();
-                panel.setLayout(new BorderLayout());
-                panel.add(icon, BorderLayout.CENTER);
-                panel.add(text, BorderLayout.NORTH);
-                JOptionPane.showMessageDialog(null, panel, "Successful",
-                        JOptionPane.PLAIN_MESSAGE);
-
-                Ticket ticket = new Ticket(level, section, row, number, (Double) priceText.getValue());
-                myCart.addTicket(ticket);
-            }
+        if (e.getActionCommand().equals("Add")) {
+            addActionMain(level, section, row, number);
+        } else if (e.getActionCommand().equals("Update")) {
+            updateAction();
+        } else if (e.getActionCommand().equals("Delete")) {
+            deleteAction();
         } else if (e.getActionCommand().equals("Save")) {
             save();
         } else if (e.getActionCommand().equals("Quit")) {
             quit();
+        } else if (e.getActionCommand().equals("Load")) {
+            load();
         }
+    }
+
+    private void addActionMain(String level, int section, int row, int number) {
+        if (!level.equals("lower") && !level.equals("upper")) {
+            JOptionPane.showMessageDialog(null, "You entered an invalid level.", "Invalid",
+                    JOptionPane.ERROR_MESSAGE);
+        } else if ((level.equals("lower") && !(section >= 100 && section <= 110))
+                || (level.equals("upper") && !(section >= 200 && section <= 210))
+                || (section > 110 && section < 200)
+                || (section < 100)
+                || (section > 210)) {
+            JOptionPane.showMessageDialog(null, "You entered an invalid section.", "Invalid",
+                    JOptionPane.ERROR_MESSAGE);
+        } else if (!(row >= 1 && row <= 23)) {
+            JOptionPane.showMessageDialog(null, "You entered an invalid row.", "Invalid",
+                    JOptionPane.ERROR_MESSAGE);
+        } else if (!(number >= 1 && number <= 20)) {
+            JOptionPane.showMessageDialog(null, "You entered an invalid number.", "Invalid",
+                    JOptionPane.ERROR_MESSAGE);
+        } else {
+            addAction();
+            jinMeme();
+            Ticket ticket = new Ticket(level, section, row, number, (Double) priceText.getValue());
+            myCart.addTicket(ticket);
+        }
+    }
+
+    private void jinMeme() {
+        ImageIcon bts = new ImageIcon(getClass().getResource("jin.png"));
+        JLabel icon = new JLabel(bts);
+        JLabel text = new JLabel("The ticket is successfully added to your cart. See you at the concert!");
+        JPanel panel = new JPanel();
+        panel.setLayout(new BorderLayout());
+        panel.add(icon, BorderLayout.CENTER);
+        panel.add(text, BorderLayout.NORTH);
+        JOptionPane.showMessageDialog(null, panel, "Successful",
+                JOptionPane.PLAIN_MESSAGE);
     }
 
     @Override
@@ -380,7 +386,6 @@ public class Selection implements ActionListener, PropertyChangeListener {
         return answer;
     }
 
-
     // EFFECTS: saves the cart to file
     private void save() {
         try {
@@ -394,7 +399,7 @@ public class Selection implements ActionListener, PropertyChangeListener {
     }
 
     // MODIFIES: this
-    // EFFECTS: loads the cart from file
+    // EFFECTS: loads the cart from file and display tickets
     private void load() {
         try {
             myCart = jsonReader.read();
@@ -405,7 +410,6 @@ public class Selection implements ActionListener, PropertyChangeListener {
 
         List<Ticket> tickets = myCart.getTickets();
         for (Ticket mc : tickets) {
-            System.out.println(mc);
 
             tableRow[0] = mc.getLevel();
             tableRow[1] = mc.getSection();
@@ -422,7 +426,4 @@ public class Selection implements ActionListener, PropertyChangeListener {
     private void quit() {
         frame.dispose();
     }
-
 }
-
-

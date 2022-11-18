@@ -17,7 +17,6 @@ import java.beans.PropertyChangeListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.NumberFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Selection implements ActionListener, PropertyChangeListener {
@@ -89,6 +88,7 @@ public class Selection implements ActionListener, PropertyChangeListener {
     }
 
     // Everything
+    @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     public Selection() {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1500,1000);
@@ -193,6 +193,7 @@ public class Selection implements ActionListener, PropertyChangeListener {
         frame.setVisible(true);
     }
 
+    @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     public void createTable() {
         // create a table model and set a Column Identifiers to this model
         Object[] columns = {"Level","Section", "Row", "Number","Price"};
@@ -290,6 +291,7 @@ public class Selection implements ActionListener, PropertyChangeListener {
     }
 
 
+    @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     @Override
     public void actionPerformed(ActionEvent e) {
 
@@ -402,9 +404,17 @@ public class Selection implements ActionListener, PropertyChangeListener {
         }
 
         List<Ticket> tickets = myCart.getTickets();
-
         for (Ticket mc : tickets) {
             System.out.println(mc);
+
+            tableRow[0] = mc.getLevel();
+            tableRow[1] = mc.getSection();
+            tableRow[2] = mc.getRow();
+            tableRow[3] = mc.getNumber();
+            tableRow[4] = mc.getPrice();
+
+            // add row to the model
+            model.addRow(tableRow);
         }
     }
 

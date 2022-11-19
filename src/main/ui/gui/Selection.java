@@ -30,7 +30,6 @@ public class Selection implements ActionListener, PropertyChangeListener {
     JTable table = new JTable();
     DefaultTableModel model = new DefaultTableModel();
 
-    // create an array of objects to set the row data
     Object[] tableRow = new Object[5];
 
     private JLabel levelLabel = new JLabel("Level: ");
@@ -63,19 +62,17 @@ public class Selection implements ActionListener, PropertyChangeListener {
     private int number;
     private double price;
 
+    // EFFECTS: schedules a job for the event dispatch thread and runs the application
     public static void main(String[] args) {
         new Selection();
-        //Schedule a job for the event dispatch thread:
-        //creating and showing this application's GUI.
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                //Turn off metal's use of bold fonts
                 UIManager.put("swing.boldMetal", Boolean.FALSE);
-                //createAndShowGUI();
             }
         });
     }
 
+    // EFFECTS: creates the application by putting all the features in one frame
     public Selection() {
         levelSetting();
         sectionSetting();
@@ -83,7 +80,6 @@ public class Selection implements ActionListener, PropertyChangeListener {
         numberSetting();
         priceSetting();
 
-        //Tell accessibility tools about label/textfield pairs.
         levelLabel.setLabelFor(levelText);
         sectionLabel.setLabelFor(sectionText);
         rowLabel.setLabelFor(rowText);
@@ -105,6 +101,7 @@ public class Selection implements ActionListener, PropertyChangeListener {
         frame.setVisible(true);
     }
 
+    // EFFECTS: adds the seating chart image in the frame
     private void chartSetting() {
         ImageIcon seatingChart = new ImageIcon(getClass().getResource("chart.png"));
         JLabel chart = new JLabel();
@@ -113,6 +110,7 @@ public class Selection implements ActionListener, PropertyChangeListener {
         frame.add(chart);
     }
 
+    // EFFECTS: adds a deletion feature as a button in the frame
     private void deleteButtonSetting() {
         deleteButton.setBounds(300,130,100,40);
         deleteButton.addActionListener(this);
@@ -120,6 +118,7 @@ public class Selection implements ActionListener, PropertyChangeListener {
         frame.add(deleteButton);
     }
 
+    // EFFECTS: adds an updating feature as a button in the frame
     private void updateButtonSetting() {
         updateButton.setBounds(300,90,100,40);
         updateButton.addActionListener(this);
@@ -127,6 +126,7 @@ public class Selection implements ActionListener, PropertyChangeListener {
         frame.add(updateButton);
     }
 
+    // EFFECTS: adds an addition feature as a button in the frame
     private void addButtonSetting() {
         addButton.setBounds(300,50,100,40);
         addButton.addActionListener(this);
@@ -134,6 +134,7 @@ public class Selection implements ActionListener, PropertyChangeListener {
         frame.add(addButton);
     }
 
+    // EFFECTS: adds a quitting feature as a button in the frame
     private void quitButtonSetting() {
         quitButton.setBounds(190,10,100,25);
         quitButton.addActionListener(this);
@@ -141,6 +142,7 @@ public class Selection implements ActionListener, PropertyChangeListener {
         frame.add(quitButton);
     }
 
+    // EFFECTS: adds a saving feature as a button in the frame
     private void saveButtonSetting() {
         saveButton.setBounds(100,10,100,25);
         saveButton.addActionListener(this);
@@ -148,6 +150,7 @@ public class Selection implements ActionListener, PropertyChangeListener {
         frame.add(saveButton);
     }
 
+    // EFFECTS: adds a loading feature as a button in the frame
     private void loadButtonSetting() {
         loadButton.setBounds(10,10,100,25);
         loadButton.addActionListener(this);
@@ -155,7 +158,7 @@ public class Selection implements ActionListener, PropertyChangeListener {
         frame.add(loadButton);
     }
 
-    // Level
+    // EFFECTS: adds a text box for a seat level
     private void levelSetting() {
         levelLabel.setBounds(10,50,500,25);
         frame.add(levelLabel);
@@ -165,6 +168,7 @@ public class Selection implements ActionListener, PropertyChangeListener {
         frame.add(levelText);
     }
 
+    // EFFECTS: adds a text box for a seat section
     private void sectionSetting() {
         sectionLabel.setBounds(10,80,80,25);
         frame.add(sectionLabel);
@@ -174,6 +178,7 @@ public class Selection implements ActionListener, PropertyChangeListener {
         frame.add(sectionText);
     }
 
+    // EFFECTS: adds a text box for a seat row
     private void rowSetting() {
         rowLabel.setBounds(10,110,80,25);
         frame.add(rowLabel);
@@ -183,6 +188,17 @@ public class Selection implements ActionListener, PropertyChangeListener {
         frame.add(rowText);
     }
 
+    // EFFECTS: adds a text box for a seat number
+    private void numberSetting() {
+        numberLabel.setBounds(10,140,80,25);
+        frame.add(numberLabel);
+        numberText.setBounds(100,140,165,25);
+        numberText.addPropertyChangeListener("value", this);
+        numberText.setValue(new Integer(number));
+        frame.add(numberText);
+    }
+
+    // EFFECTS: adds a text box for a seat price
     private void priceSetting() {
         price = computePrice(level, row);
         priceLabel.setBounds(10,170,80,25);
@@ -195,15 +211,8 @@ public class Selection implements ActionListener, PropertyChangeListener {
         frame.add(priceText);
     }
 
-    private void numberSetting() {
-        numberLabel.setBounds(10,140,80,25);
-        frame.add(numberLabel);
-        numberText.setBounds(100,140,165,25);
-        numberText.addPropertyChangeListener("value", this);
-        numberText.setValue(new Integer(number));
-        frame.add(numberText);
-    }
 
+    // EFFECTS: creates a table that corresponds to text fields
     public void createTable() {
         // create a table model and set a Column Identifiers to this model
         Object[] columns = {"Level", "Section", "Row", "Number", "Price"};
@@ -225,7 +234,7 @@ public class Selection implements ActionListener, PropertyChangeListener {
         getSelectedRowAction();
     }
 
-    // EFFECTS: get selected row data From table to textfields
+    // EFFECTS: gets selected row data from table to text fields
     private void getSelectedRowAction() {
         table.addMouseListener(new MouseAdapter() {
 
@@ -244,6 +253,9 @@ public class Selection implements ActionListener, PropertyChangeListener {
         });
     }
 
+    // MODIFIES: this
+    // EFFECTS: when the updating button is clicked,
+    //          overwrites the information in the table by text fields after the row is selected
     private void updateAction() {
         updateButton.addActionListener(new ActionListener() {
 
@@ -266,6 +278,8 @@ public class Selection implements ActionListener, PropertyChangeListener {
         });
     }
 
+    // MODIFIES: this
+    // EFFECTS: when the deletion button is clicked, deletes the row after it is selected
     private void deleteAction() {
         deleteButton.addActionListener(new ActionListener() {
 
@@ -284,6 +298,8 @@ public class Selection implements ActionListener, PropertyChangeListener {
         });
     }
 
+    // MODIFIES: this
+    // EFFECTS: when the addition button is clicked, converts information in text fields into the last row of the table
     private void addAction() {
         tableRow[0] = levelText.getText();
         tableRow[1] = sectionText.getText();
@@ -295,7 +311,7 @@ public class Selection implements ActionListener, PropertyChangeListener {
         model.addRow(tableRow);
     }
 
-
+    // EFFECTS: processes user selection
     @Override
     public void actionPerformed(ActionEvent e) {
         String level = levelText.getText();
@@ -318,6 +334,8 @@ public class Selection implements ActionListener, PropertyChangeListener {
         }
     }
 
+    // EFFECTS: when the addition button is clicked and if the inputs meet the requirement, then process the addition
+    //          and makes the window pop up
     private void addActionMain(String level, int section, int row, int number) {
         if (!level.equals("lower") && !level.equals("upper")) {
             JOptionPane.showMessageDialog(null, "You entered an invalid level.", "Invalid",
@@ -343,6 +361,7 @@ public class Selection implements ActionListener, PropertyChangeListener {
         }
     }
 
+    // EFFECTS: if the ticket is added to the cart successfully, makes the message and image pop up
     private void jinMeme() {
         ImageIcon bts = new ImageIcon(getClass().getResource("jin.png"));
         JLabel icon = new JLabel(bts);
@@ -355,6 +374,8 @@ public class Selection implements ActionListener, PropertyChangeListener {
                 JOptionPane.PLAIN_MESSAGE);
     }
 
+    // MODIFIES: this
+    // EFFECTS: changes the values of each filed by the user inputs
     @Override
     public void propertyChange(PropertyChangeEvent e) {
         Object source = e.getSource();
@@ -371,8 +392,8 @@ public class Selection implements ActionListener, PropertyChangeListener {
         priceText.setValue(new Double(price));
     }
 
-
-    //Compute the price based on the seat level and row.
+    // MODIFIES: this
+    // EFFECTS: computes the price based on the seat level and row
     double computePrice(String level, int row) {
         double answer;
 
@@ -385,6 +406,7 @@ public class Selection implements ActionListener, PropertyChangeListener {
         }
         return answer;
     }
+
 
     // EFFECTS: saves the cart to file
     private void save() {
@@ -422,7 +444,7 @@ public class Selection implements ActionListener, PropertyChangeListener {
         }
     }
 
-    // EFFECTS: close the frame
+    // EFFECTS: closes the frame
     private void quit() {
         frame.dispose();
     }

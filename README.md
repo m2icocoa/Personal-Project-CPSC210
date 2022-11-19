@@ -38,13 +38,14 @@ If I have time to do more...
 - As a user, I want to be able to select and add a light stick (ARMY Bomb) to my cart. 
 
 # Instructions for Grader
-- You can generate the first required event related to adding tickets to your cart by filling out the 
-seat information you desire and clicking the button labelled "Add". 
-- You can generate the second required event related to adding tickets to your cart by 
-selecting the ticket you want to update, filling out the information, and clicking the button labelled "Update". 
-- You can locate my visual component by either running the application or adding a ticket. 
-- You can save the state of my application by clicking the button labelled "Save". 
-- You can reload the state of my application by clicking the button labelled "Load".
+- I can generate the first required event by filling out the seat information I desire 
+and clicking the button labelled "Add". 
+- I can generate the second required event by selecting the ticket I want to remove and 
+clicking the button labelled "Delete".
+- I can locate my visual component by either running the application or adding a ticket. 
+- I can save the state of my application by clicking the button labelled "Save". Moreover, when I click the button 
+labelled "Quit" or the X button on the right corner, the message pops up to give me options to save or not.  
+- I can reload the state of my application by clicking the button labelled "Load".
 
 
 # Reference

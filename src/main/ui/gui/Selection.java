@@ -8,10 +8,7 @@ import persistence.JsonWriter;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.FileNotFoundException;
@@ -99,6 +96,18 @@ public class Selection implements ActionListener, PropertyChangeListener {
         frame.setSize(1500,1000);
         frame.setLayout(null);
         frame.setVisible(true);
+
+        closingAppByClickingX();
+    }
+
+    // EFFECTS: when the x button on the right corner is clicked, check if the user wants to save tickets first
+    private void closingAppByClickingX() {
+        frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                quit();
+            }
+        });
     }
 
     // EFFECTS: adds the seating chart image in the frame
@@ -261,7 +270,6 @@ public class Selection implements ActionListener, PropertyChangeListener {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-
                 // i = the index of the selected row
                 int i = table.getSelectedRow();
 
@@ -270,7 +278,7 @@ public class Selection implements ActionListener, PropertyChangeListener {
                     model.setValueAt(sectionText.getText(), i, 1);
                     model.setValueAt(rowText.getText(), i, 2);
                     model.setValueAt(numberText.getText(), i, 3);
-                    model.setValueAt(priceText.getText(),i,4);
+                    model.setValueAt(priceText.getText(), i, 4);
                 } else {
                     System.out.println("Update Error");
                 }
@@ -345,14 +353,14 @@ public class Selection implements ActionListener, PropertyChangeListener {
                 || (section > 110 && section < 200)
                 || (section < 100)
                 || (section > 210)) {
-            JOptionPane.showMessageDialog(null, "You entered an invalid section.", "Invalid",
-                    JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "You entered an invalid section.",
+                    "Invalid", JOptionPane.ERROR_MESSAGE);
         } else if (!(row >= 1 && row <= 23)) {
-            JOptionPane.showMessageDialog(null, "You entered an invalid row.", "Invalid",
-                    JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "You entered an invalid row.",
+                    "Invalid",  JOptionPane.ERROR_MESSAGE);
         } else if (!(number >= 1 && number <= 20)) {
-            JOptionPane.showMessageDialog(null, "You entered an invalid number.", "Invalid",
-                    JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "You entered an invalid number.",
+                    "Invalid", JOptionPane.ERROR_MESSAGE);
         } else {
             addAction();
             jinMeme();
@@ -408,13 +416,15 @@ public class Selection implements ActionListener, PropertyChangeListener {
     }
 
 
-    // EFFECTS: saves the cart to file
+    // EFFECTS: saves the cart to file and makes the message pop up
     private void save() {
         try {
             jsonWriter.open();
             jsonWriter.write(myCart);
             jsonWriter.close();
             System.out.println("Saved " + myCart.getName() + " to " + JSON_STORE);
+            JOptionPane.showMessageDialog(null, "Your tickets are saved.", "Save",
+                    JOptionPane.PLAIN_MESSAGE);
         } catch (FileNotFoundException e) {
             System.out.println("Unable to write to file: " + JSON_STORE);
         }
@@ -444,8 +454,17 @@ public class Selection implements ActionListener, PropertyChangeListener {
         }
     }
 
-    // EFFECTS: closes the frame
+    // EFFECTS: saves the tickets and closes the application if user wants to, otherwise just closes the application
     private void quit() {
-        frame.dispose();
+        int response = JOptionPane.showConfirmDialog(null,
+                "Would you like to save your tickets?",
+                null,
+                JOptionPane.YES_NO_OPTION);
+        if (response == 0) {
+            save();
+            frame.dispose();
+        } else if (response == 1) {
+            frame.dispose();
+        }
     }
 }

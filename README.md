@@ -16,8 +16,7 @@ but only in huge stadiums.
 Thus, I decided to create a system where we buy concert tickets hoping that BTS will come to UBC to perform one day.
 
 
-
-## User Stories
+# User Stories
 - As a user, I want to be able to select a ticket.
 - As a user, I want to be able to know the price of the selected seat depending on how close it is to the stage.
 - As a user, I want to be able to put a ticket to my cart.
@@ -28,7 +27,7 @@ I want to be reminded to save my cart to file and have the option to do so or no
 - As a user, when I start the application, I want to be given the option to load my cart from file.
 
 
-## Potential Future User Stories
+### Potential Future User Stories
 If I have time to do more...
 - As a user, I want to be able to remove a ticket from my cart.
 - As a user, I want to be able to select the date and time of the concert.
@@ -38,14 +37,19 @@ If I have time to do more...
 - As a user, I want to be able to get a discount by using my membership status.
 - As a user, I want to be able to select and add a light stick (ARMY Bomb) to my cart. 
 
+# Instructions for Grader
+- You can generate the first required event related to adding tickets to your cart by filling out the 
+seat information you desire and clicking the button labelled "Add". 
+- You can generate the second required event related to adding tickets to your cart by 
+selecting the ticket you want to update, filling out the information, and clicking the button labelled "Update". 
+- You can locate my visual component by either running the application or adding a ticket. 
+- You can save the state of my application by clicking the button labelled "Save". 
+- You can reload the state of my application by clicking the button labelled "Load".
+
+
+# Reference
 Some methods in this project are cited from:
 https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
-
-
-# Instructions for Grader
-- You can generate the first required event related to adding Xs to a Y by...
-- You can generate the second required event related to adding Xs to a Y by...
-- You can locate my visual component by...
-- You can save the state of my application by...
-- You can reload the state of my application by...
+https://www.youtube.com/watch?v=22MBsRYuM4Q
+https://1bestcsharp.blogspot.com/2015/05/java-jtable-add-delete-update-row.html
 

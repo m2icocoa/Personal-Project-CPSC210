@@ -1,5 +1,7 @@
 package ui.gui;
 
+import model.Event;
+import model.EventLog;
 import model.MyCart;
 import model.Ticket;
 import persistence.JsonReader;
@@ -92,7 +94,7 @@ public class Selection implements ActionListener, PropertyChangeListener {
         chartSetting();
         createTable();
 
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         frame.setSize(1500,1000);
         frame.setLayout(null);
         frame.setVisible(true);
@@ -105,6 +107,10 @@ public class Selection implements ActionListener, PropertyChangeListener {
         frame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
+                EventLog eventLog = EventLog.getInstance();
+                for (Event event : eventLog) {
+                    System.out.print(event);
+                }
                 quit();
             }
         });
@@ -336,6 +342,10 @@ public class Selection implements ActionListener, PropertyChangeListener {
         } else if (e.getActionCommand().equals("Save")) {
             save();
         } else if (e.getActionCommand().equals("Quit")) {
+            EventLog eventLog = EventLog.getInstance();
+            for (Event event : eventLog) {
+                System.out.print(event);
+            }
             quit();
         } else if (e.getActionCommand().equals("Load")) {
             load();
@@ -462,9 +472,9 @@ public class Selection implements ActionListener, PropertyChangeListener {
                 JOptionPane.YES_NO_OPTION);
         if (response == 0) {
             save();
-            frame.dispose();
+            System.exit(0);
         } else if (response == 1) {
-            frame.dispose();
+            System.exit(0);
         }
     }
 }

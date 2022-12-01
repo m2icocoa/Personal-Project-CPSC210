@@ -37,8 +37,6 @@ public class SeatingChart {
         boolean keepGoing = true;
         String command;
 
-        //init();
-
         while (keepGoing) {
             displayMenu();
             command = input.next();
@@ -81,7 +79,7 @@ public class SeatingChart {
         selectRow();
         selectNum();
         printPrice();
-        displayAddOrDoNothing();
+        displayAddOrRemove();
         addOrDoNothing();
     }
 
@@ -90,10 +88,10 @@ public class SeatingChart {
         String command = input.next();
         command = command.toLowerCase();
 
-        if (command.equals("y")) {
+        if (command.equals("a")) {
             addSeatToMyCart();
-        } else if (command.equals("n")) {
-            runSeatingChart();
+        } else if (command.equals("r")) {
+            removeSeatFromMyCart();
         } else {
             System.out.println("Invalid selection.");
         }
@@ -188,6 +186,21 @@ public class SeatingChart {
         selected = new Ticket(null, 0, 0, 0,0.0);
     }
 
+    // EFFECTS: removes the preferred seat to the cart
+    private void removeSeatFromMyCart() {
+        if (myCart.ifContains(selected)) {
+            myCart.removeTicket(selected);
+            System.out.println(
+                    "\nLevel: " + selected.getLevel()
+                            + "\nSection: " + selected.getSection() + "\nRow: " + selected.getRow()
+                            + "\nNumber: " + selected.getNumber() + "\nPrice: " + selected.getPrice()
+                            + "\nThis ticket is removed from your cart.");
+        } else {
+            System.out.println("We could not find the ticket in your cart.");
+        }
+        selected = new Ticket(null, 0, 0, 0,0.0);
+    }
+
     // EFFECTS: counts how many tickets in the cart
     private void checkHowManyTickets() {
         if (myCart.quantity() == 0 || myCart.quantity() == 1) {
@@ -222,11 +235,11 @@ public class SeatingChart {
         System.out.println("\tq -> quit");
     }
 
-    // EFFECTS: displays a question where a user wants to add the selected ticket from the cart
-    private void displayAddOrDoNothing() {
-        System.out.println("\nWould you like to add this ticket to your cart?");
-        System.out.println("\ty -> yes");
-        System.out.println("\tn -> no");
+    // EFFECTS: displays a question where a user wants to add/remove the selected ticket to/from the cart
+    private void displayAddOrRemove() {
+        System.out.println("\nWould you like to add or remove this ticket?");
+        System.out.println("\ta -> add");
+        System.out.println("\tr -> remove");
     }
 
     // EFFECTS: prints all the tickets in my cart to the console

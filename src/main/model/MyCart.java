@@ -3,7 +3,6 @@ package model;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.Writable;
-import ui.gui.Selection;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -13,6 +12,7 @@ import java.util.List;
 public class MyCart implements Writable {
     private final String name;
     ArrayList<Ticket> cart;
+    private int indexOfCorresponding;
 
     // EFFECTS: constructs an empty cart
     public MyCart(String name) {
@@ -25,6 +25,7 @@ public class MyCart implements Writable {
     public void addTicket(Ticket ticket) {
         if (!ifContains(ticket)) {
             cart.add(ticket);
+            EventLog.getInstance().logEvent(new Event("Successful add"));
         }
     }
 
@@ -38,7 +39,8 @@ public class MyCart implements Writable {
     //          otherwise, do nothing
     public void removeTicket(Ticket ticket) {
         if (ifContains(ticket)) {
-            cart.remove(ticket);
+            cart.remove(cart.get(indexOfCorresponding));
+            EventLog.getInstance().logEvent(new Event("Successful remove"));
         }
     }
 
@@ -50,6 +52,7 @@ public class MyCart implements Writable {
                 if (selectedTicket.getSection() == ticket.getSection()) {
                     if (selectedTicket.getRow() == ticket.getRow()) {
                         if (selectedTicket.getNumber() == ticket.getNumber()) {
+                            indexOfCorresponding = cart.indexOf(ticket);
                             return true;
                         }
                     }

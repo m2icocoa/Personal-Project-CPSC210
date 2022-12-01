@@ -69,6 +69,5 @@ public class JsonReader {
         mc.addTicket(ticket);
     }
 }
-
 // Methods above were taken from JsonReader in:
 // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git

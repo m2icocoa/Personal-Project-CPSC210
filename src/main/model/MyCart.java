@@ -25,7 +25,7 @@ public class MyCart implements Writable {
     public void addTicket(Ticket ticket) {
         if (!ifContains(ticket)) {
             cart.add(ticket);
-            EventLog.getInstance().logEvent(new Event("Successful add"));
+            EventLog.getInstance().logEvent(new Event("Ticket added to cart."));
         }
     }
 
@@ -40,8 +40,20 @@ public class MyCart implements Writable {
     public void removeTicket(Ticket ticket) {
         if (ifContains(ticket)) {
             cart.remove(cart.get(indexOfCorresponding));
-            EventLog.getInstance().logEvent(new Event("Successful remove"));
+            EventLog.getInstance().logEvent(new Event("Ticket removed from cart."));
         }
+    }
+
+    // TODO
+    public void removeTicketForGUI(int i) {
+        cart.remove(cart.get(i));
+        EventLog.getInstance().logEvent(new Event("Ticket removed from cart!!!"));
+    }
+
+    // TODO
+    public void updateTicketForGUI(int i, Ticket ticket) {
+        cart.set(i, ticket);
+        EventLog.getInstance().logEvent(new Event("Ticket removed from cart haha"));
     }
 
     // EFFECTS: if the exact same ticket is in my cart, return true,

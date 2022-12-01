@@ -1,10 +1,10 @@
 {
     "tickets": [{
-        "number": 12,
+        "number": 4,
         "level": "lower",
-        "price": 80,
-        "section": 100,
-        "row": 12
+        "price": 102.5,
+        "section": 104,
+        "row": 3
     }],
     "name": "Mii's cart"
 }

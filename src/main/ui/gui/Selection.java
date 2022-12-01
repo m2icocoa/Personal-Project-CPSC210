@@ -272,44 +272,43 @@ public class Selection implements ActionListener, PropertyChangeListener {
     // EFFECTS: when the updating button is clicked,
     //          overwrites the information in the table by text fields after the row is selected
     private void updateAction() {
-        updateButton.addActionListener(new ActionListener() {
+        // i = the index of the selected row
+        int i = table.getSelectedRow();
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // i = the index of the selected row
-                int i = table.getSelectedRow();
+        if (i >= 0) {
+            String level = (String)levelText.getValue();
+            int section = ((Number)sectionText.getValue()).intValue();
+            int row = ((Number)rowText.getValue()).intValue();
+            int number = ((Number) numberText.getValue()).intValue();
+            double price = (Double) priceText.getValue();
 
-                if (i >= 0) {
-                    model.setValueAt(levelText.getText(), i, 0);
-                    model.setValueAt(sectionText.getText(), i, 1);
-                    model.setValueAt(rowText.getText(), i, 2);
-                    model.setValueAt(numberText.getText(), i, 3);
-                    model.setValueAt(priceText.getText(), i, 4);
-                } else {
-                    System.out.println("Update Error");
-                }
-            }
-        });
+            model.setValueAt(level, i, 0);
+            model.setValueAt(section, i, 1);
+            model.setValueAt(row, i, 2);
+            model.setValueAt(number, i, 3);
+            model.setValueAt(price, i, 4);
+
+            Ticket ticket = new Ticket(level, section, row, number, price);
+
+            myCart.updateTicketForGUI(i, ticket);
+        } else {
+            System.out.println("Update Error");
+        }
     }
 
     // MODIFIES: this
     // EFFECTS: when the deletion button is clicked, deletes the row after it is selected
     private void deleteAction() {
-        deleteButton.addActionListener(new ActionListener() {
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        // i = the index of the selected row
+        int i = table.getSelectedRow();
 
-                // i = the index of the selected row
-                int i = table.getSelectedRow();
-                if (i >= 0) {
-                    // remove a row from jtable
-                    model.removeRow(i);
-                } else {
-                    System.out.println("Delete Error");
-                }
-            }
-        });
+        if (i >= 0) {
+            model.removeRow(i);
+            myCart.removeTicketForGUI(i);
+        } else {
+            System.out.println("Delete Error");
+        }
     }
 
     // MODIFIES: this
@@ -355,6 +354,7 @@ public class Selection implements ActionListener, PropertyChangeListener {
     // EFFECTS: when the addition button is clicked and if the inputs meet the requirement, then process the addition
     //          and makes the window pop up
     private void addActionMain(String level, int section, int row, int number) {
+        Ticket ticket = new Ticket(level, section, row, number, (Double) priceText.getValue());
         if (!level.equals("lower") && !level.equals("upper")) {
             JOptionPane.showMessageDialog(null, "You entered an invalid level.", "Invalid",
                     JOptionPane.ERROR_MESSAGE);
@@ -371,10 +371,11 @@ public class Selection implements ActionListener, PropertyChangeListener {
         } else if (!(number >= 1 && number <= 20)) {
             JOptionPane.showMessageDialog(null, "You entered an invalid number.",
                     "Invalid", JOptionPane.ERROR_MESSAGE);
+        } else if (myCart.ifContains(ticket)) {
+            // do nothing
         } else {
             addAction();
             jinMeme();
-            Ticket ticket = new Ticket(level, section, row, number, (Double) priceText.getValue());
             myCart.addTicket(ticket);
         }
     }
@@ -457,7 +458,7 @@ public class Selection implements ActionListener, PropertyChangeListener {
             tableRow[1] = mc.getSection();
             tableRow[2] = mc.getRow();
             tableRow[3] = mc.getNumber();
-            tableRow[4] = mc.getPrice();
+            tableRow[4] = "$" + mc.getPrice();
 
             // add row to the model
             model.addRow(tableRow);

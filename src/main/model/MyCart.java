@@ -47,13 +47,13 @@ public class MyCart implements Writable {
     // TODO
     public void removeTicketForGUI(int i) {
         cart.remove(cart.get(i));
-        EventLog.getInstance().logEvent(new Event("Ticket removed from cart!!!"));
+        EventLog.getInstance().logEvent(new Event("Ticket removed from cart."));
     }
 
     // TODO
     public void updateTicketForGUI(int i, Ticket ticket) {
         cart.set(i, ticket);
-        EventLog.getInstance().logEvent(new Event("Ticket removed from cart haha"));
+        EventLog.getInstance().logEvent(new Event("Ticket updated."));
     }
 
     // EFFECTS: if the exact same ticket is in my cart, return true,

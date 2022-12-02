@@ -92,6 +92,7 @@ public class Selection implements ActionListener, PropertyChangeListener {
         updateButtonSetting();
         deleteButtonSetting();
         chartSetting();
+        explanation();
         createTable();
 
         frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -121,8 +122,45 @@ public class Selection implements ActionListener, PropertyChangeListener {
         ImageIcon seatingChart = new ImageIcon(getClass().getResource("chart.png"));
         JLabel chart = new JLabel();
         chart.setIcon(seatingChart);
-        chart.setBounds(600,10,800,500);
+        chart.setBounds(600,250,800,400);
         frame.add(chart);
+    }
+
+    // TODO
+    private void explanation() {
+        JLabel explanationZero = new JLabel();
+        JLabel explanationOne = new JLabel();
+        JLabel explanationTwo = new JLabel();
+        JLabel explanationThree = new JLabel();
+        JLabel explanationFour = new JLabel();
+        JLabel explanationFive = new JLabel();
+        JLabel explanationSix = new JLabel();
+        explanationZero.setText("How to Use");
+        explanationZero.setFont(new Font(null, Font.BOLD, 20));
+        explanationOne.setText("1) Enter the seat level you prefer: lower or upper.");
+        explanationTwo.setText(
+                "2) If you enter 'lower' --> "
+                        + "Enter the seat section you prefer: 100, 101, 102, 103, 104, 105, 106, 107, 108, 109 110.");
+        explanationThree.setText(
+                "\t\t\t\tIf you enter 'upper' --> "
+                        + "Enter the seat section you prefer: 200, 201, 202, 203, 204, 205, 206, 207, 208, 209 210.");
+        explanationFour.setText("3) Enter the seat row you prefer from 1 to 23.");
+        explanationFive.setText("4) Enter the seat number you prefer from 1 to 20.");
+        explanationSix.setText("The system will automatically calculate the price of your preferred ticket!");
+        explanationZero.setBounds(600, 1, 800, 50);
+        explanationOne.setBounds(600, 10, 800, 100);
+        explanationTwo.setBounds(600, 30, 800, 100);
+        explanationThree.setBounds(600, 50, 800, 100);
+        explanationFour.setBounds(600, 70, 800, 100);
+        explanationFive.setBounds(600, 90, 800, 100);
+        explanationSix.setBounds(600, 110, 800, 100);
+        frame.add(explanationZero);
+        frame.add(explanationOne);
+        frame.add(explanationTwo);
+        frame.add(explanationThree);
+        frame.add(explanationFour);
+        frame.add(explanationFive);
+        frame.add(explanationSix);
     }
 
     // EFFECTS: adds a deletion feature as a button in the frame
@@ -274,25 +312,24 @@ public class Selection implements ActionListener, PropertyChangeListener {
     private void updateAction() {
         // i = the index of the selected row
         int i = table.getSelectedRow();
+        String level = (String) levelText.getValue();
+        int section = ((Number) sectionText.getValue()).intValue();
+        int row = ((Number) rowText.getValue()).intValue();
+        int number = ((Number) numberText.getValue()).intValue();
+        double price = (Double) priceText.getValue();
+        Ticket ticket = new Ticket(level, section, row, number, price);
 
-        if (i >= 0) {
-            String level = (String)levelText.getValue();
-            int section = ((Number)sectionText.getValue()).intValue();
-            int row = ((Number)rowText.getValue()).intValue();
-            int number = ((Number) numberText.getValue()).intValue();
-            double price = (Double) priceText.getValue();
+        if (i >= 0 && !myCart.ifContains(ticket)) {
 
             model.setValueAt(level, i, 0);
             model.setValueAt(section, i, 1);
             model.setValueAt(row, i, 2);
             model.setValueAt(number, i, 3);
-            model.setValueAt(price, i, 4);
-
-            Ticket ticket = new Ticket(level, section, row, number, price);
+            model.setValueAt("$" + price, i, 4);
 
             myCart.updateTicketForGUI(i, ticket);
         } else {
-            System.out.println("Update Error");
+            duplicatesWarning();
         }
     }
 
@@ -356,28 +393,50 @@ public class Selection implements ActionListener, PropertyChangeListener {
     private void addActionMain(String level, int section, int row, int number) {
         Ticket ticket = new Ticket(level, section, row, number, (Double) priceText.getValue());
         if (!level.equals("lower") && !level.equals("upper")) {
-            JOptionPane.showMessageDialog(null, "You entered an invalid level.", "Invalid",
-                    JOptionPane.ERROR_MESSAGE);
+            invalidLevelWarning();
         } else if ((level.equals("lower") && !(section >= 100 && section <= 110))
                 || (level.equals("upper") && !(section >= 200 && section <= 210))
                 || (section > 110 && section < 200)
                 || (section < 100)
                 || (section > 210)) {
-            JOptionPane.showMessageDialog(null, "You entered an invalid section.",
-                    "Invalid", JOptionPane.ERROR_MESSAGE);
+            invalidSectionWarning();
         } else if (!(row >= 1 && row <= 23)) {
-            JOptionPane.showMessageDialog(null, "You entered an invalid row.",
-                    "Invalid",  JOptionPane.ERROR_MESSAGE);
+            invalidRowWarning();
         } else if (!(number >= 1 && number <= 20)) {
-            JOptionPane.showMessageDialog(null, "You entered an invalid number.",
-                    "Invalid", JOptionPane.ERROR_MESSAGE);
+            invalidNumberWarning();
         } else if (myCart.ifContains(ticket)) {
-            // do nothing
-        } else {
+            duplicatesWarning();
+        } else if (!myCart.ifContains(ticket)) {
             addAction();
             jinMeme();
             myCart.addTicket(ticket);
         }
+    }
+
+    private void invalidNumberWarning() {
+        JOptionPane.showMessageDialog(null, "You entered an invalid number.",
+                "Invalid", JOptionPane.ERROR_MESSAGE);
+    }
+
+    private void invalidRowWarning() {
+        JOptionPane.showMessageDialog(null, "You entered an invalid row.",
+                "Invalid",  JOptionPane.ERROR_MESSAGE);
+    }
+
+    private void invalidSectionWarning() {
+        JOptionPane.showMessageDialog(null, "You entered an invalid section.",
+                "Invalid", JOptionPane.ERROR_MESSAGE);
+    }
+
+    private void invalidLevelWarning() {
+        JOptionPane.showMessageDialog(null, "You entered an invalid level.", "Invalid",
+                JOptionPane.ERROR_MESSAGE);
+    }
+
+    private void duplicatesWarning() {
+        JOptionPane.showMessageDialog(null, "You already have this ticket in your cart.",
+                "Error",
+                JOptionPane.ERROR_MESSAGE);
     }
 
     // EFFECTS: if the ticket is added to the cart successfully, makes the message and image pop up

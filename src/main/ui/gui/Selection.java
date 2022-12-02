@@ -25,11 +25,11 @@ public class Selection implements ActionListener, PropertyChangeListener {
     private JsonWriter jsonWriter = new JsonWriter(JSON_STORE);
     private JsonReader jsonReader = new JsonReader(JSON_STORE);
 
-    JFrame frame = new JFrame("Ticket Selection");
-    JTable table = new JTable();
-    DefaultTableModel model = new DefaultTableModel();
+    private JFrame frame = new JFrame("Ticket Selection");
+    private JTable table = new JTable();
+    private DefaultTableModel model = new DefaultTableModel();
 
-    Object[] tableRow = new Object[5];
+    private Object[] tableRow = new Object[5];
 
     private JLabel levelLabel = new JLabel("Level: ");
     private JLabel sectionLabel = new JLabel("Section: ");
@@ -42,24 +42,32 @@ public class Selection implements ActionListener, PropertyChangeListener {
     private NumberFormat numberFormat = NumberFormat.getNumberInstance();
     private NumberFormat priceFormat = NumberFormat.getCurrencyInstance();
 
-    JFormattedTextField levelText = new JFormattedTextField();
-    JFormattedTextField sectionText = new JFormattedTextField(sectionFormat);
-    JFormattedTextField rowText = new JFormattedTextField(rowFormat);
-    JFormattedTextField numberText = new JFormattedTextField(numberFormat);
-    JFormattedTextField priceText = new JFormattedTextField(priceFormat);
+    private JFormattedTextField levelText = new JFormattedTextField();
+    private JFormattedTextField sectionText = new JFormattedTextField(sectionFormat);
+    private JFormattedTextField rowText = new JFormattedTextField(rowFormat);
+    private JFormattedTextField numberText = new JFormattedTextField(numberFormat);
+    private JFormattedTextField priceText = new JFormattedTextField(priceFormat);
 
-    JButton loadButton = new JButton("Load");
-    JButton addButton = new JButton("Add");
-    JButton quitButton = new JButton("Quit");
-    JButton saveButton = new JButton("Save");
-    JButton updateButton = new JButton("Update");
-    JButton deleteButton = new JButton("Delete");
+    private JButton loadButton = new JButton("Load");
+    private JButton addButton = new JButton("Add");
+    private JButton quitButton = new JButton("Quit");
+    private JButton saveButton = new JButton("Save");
+    private JButton updateButton = new JButton("Update");
+    private JButton deleteButton = new JButton("Delete");
 
     private String level = "";
     private int section;
     private int row;
     private int number;
     private double price;
+
+    private JLabel explanationZero = new JLabel();
+    private JLabel explanationOne = new JLabel();
+    private JLabel explanationTwo = new JLabel();
+    private JLabel explanationThree = new JLabel();
+    private JLabel explanationFour = new JLabel();
+    private JLabel explanationFive = new JLabel();
+    private JLabel explanationSix = new JLabel();
 
     // EFFECTS: schedules a job for the event dispatch thread and runs the application
     public static void main(String[] args) {
@@ -73,6 +81,23 @@ public class Selection implements ActionListener, PropertyChangeListener {
 
     // EFFECTS: creates the application by putting all the features in one frame
     public Selection() {
+        ticketInputSettings();
+
+        allButtonSettings();
+
+        chartSetting();
+        explanation();
+        createTable();
+
+        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        frame.setSize(1500,1000);
+        frame.setLayout(null);
+        frame.setVisible(true);
+
+        closingAppByClickingX();
+    }
+
+    private void ticketInputSettings() {
         levelSetting();
         sectionSetting();
         rowSetting();
@@ -84,23 +109,15 @@ public class Selection implements ActionListener, PropertyChangeListener {
         rowLabel.setLabelFor(rowText);
         numberLabel.setLabelFor(numberText);
         priceLabel.setLabelFor(priceText);
+    }
 
+    private void allButtonSettings() {
         loadButtonSetting();
         saveButtonSetting();
         quitButtonSetting();
         addButtonSetting();
         updateButtonSetting();
         deleteButtonSetting();
-        chartSetting();
-        explanation();
-        createTable();
-
-        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        frame.setSize(1500,1000);
-        frame.setLayout(null);
-        frame.setVisible(true);
-
-        closingAppByClickingX();
     }
 
     // EFFECTS: when the x button on the right corner is clicked, check if the user wants to save tickets first
@@ -122,19 +139,12 @@ public class Selection implements ActionListener, PropertyChangeListener {
         ImageIcon seatingChart = new ImageIcon(getClass().getResource("chart.png"));
         JLabel chart = new JLabel();
         chart.setIcon(seatingChart);
-        chart.setBounds(600,250,800,400);
+        chart.setBounds(600,300,800,400);
         frame.add(chart);
     }
 
     // TODO
     private void explanation() {
-        JLabel explanationZero = new JLabel();
-        JLabel explanationOne = new JLabel();
-        JLabel explanationTwo = new JLabel();
-        JLabel explanationThree = new JLabel();
-        JLabel explanationFour = new JLabel();
-        JLabel explanationFive = new JLabel();
-        JLabel explanationSix = new JLabel();
         explanationZero.setText("How to Use");
         explanationZero.setFont(new Font(null, Font.BOLD, 20));
         explanationOne.setText("1) Enter the seat level you prefer: lower or upper.");
@@ -147,13 +157,13 @@ public class Selection implements ActionListener, PropertyChangeListener {
         explanationFour.setText("3) Enter the seat row you prefer from 1 to 23.");
         explanationFive.setText("4) Enter the seat number you prefer from 1 to 20.");
         explanationSix.setText("The system will automatically calculate the price of your preferred ticket!");
-        explanationZero.setBounds(600, 1, 800, 50);
-        explanationOne.setBounds(600, 10, 800, 100);
-        explanationTwo.setBounds(600, 30, 800, 100);
-        explanationThree.setBounds(600, 50, 800, 100);
-        explanationFour.setBounds(600, 70, 800, 100);
-        explanationFive.setBounds(600, 90, 800, 100);
-        explanationSix.setBounds(600, 110, 800, 100);
+        explanationZero.setBounds(600, 50, 800, 50);
+        explanationOne.setBounds(600, 70, 800, 100);
+        explanationTwo.setBounds(600, 90, 800, 100);
+        explanationThree.setBounds(600, 110, 800, 100);
+        explanationFour.setBounds(600, 130, 800, 100);
+        explanationFive.setBounds(600, 150, 800, 100);
+        explanationSix.setBounds(600, 170, 800, 100);
         frame.add(explanationZero);
         frame.add(explanationOne);
         frame.add(explanationTwo);
@@ -165,7 +175,7 @@ public class Selection implements ActionListener, PropertyChangeListener {
 
     // EFFECTS: adds a deletion feature as a button in the frame
     private void deleteButtonSetting() {
-        deleteButton.setBounds(300,130,100,40);
+        deleteButton.setBounds(320,150,100,40);
         deleteButton.addActionListener(this);
         deleteButton.setActionCommand("Delete");
         frame.add(deleteButton);
@@ -173,7 +183,7 @@ public class Selection implements ActionListener, PropertyChangeListener {
 
     // EFFECTS: adds an updating feature as a button in the frame
     private void updateButtonSetting() {
-        updateButton.setBounds(300,90,100,40);
+        updateButton.setBounds(320,110,100,40);
         updateButton.addActionListener(this);
         updateButton.setActionCommand("Update");
         frame.add(updateButton);
@@ -181,7 +191,7 @@ public class Selection implements ActionListener, PropertyChangeListener {
 
     // EFFECTS: adds an addition feature as a button in the frame
     private void addButtonSetting() {
-        addButton.setBounds(300,50,100,40);
+        addButton.setBounds(320,70,100,40);
         addButton.addActionListener(this);
         addButton.setActionCommand("Add");
         frame.add(addButton);
@@ -189,7 +199,7 @@ public class Selection implements ActionListener, PropertyChangeListener {
 
     // EFFECTS: adds a quitting feature as a button in the frame
     private void quitButtonSetting() {
-        quitButton.setBounds(190,10,100,25);
+        quitButton.setBounds(230,10,100,25);
         quitButton.addActionListener(this);
         quitButton.setActionCommand("Quit");
         frame.add(quitButton);
@@ -197,7 +207,7 @@ public class Selection implements ActionListener, PropertyChangeListener {
 
     // EFFECTS: adds a saving feature as a button in the frame
     private void saveButtonSetting() {
-        saveButton.setBounds(100,10,100,25);
+        saveButton.setBounds(140,10,100,25);
         saveButton.addActionListener(this);
         saveButton.setActionCommand("Save");
         frame.add(saveButton);
@@ -205,7 +215,7 @@ public class Selection implements ActionListener, PropertyChangeListener {
 
     // EFFECTS: adds a loading feature as a button in the frame
     private void loadButtonSetting() {
-        loadButton.setBounds(10,10,100,25);
+        loadButton.setBounds(50,10,100,25);
         loadButton.addActionListener(this);
         loadButton.setActionCommand("Load");
         frame.add(loadButton);
@@ -213,9 +223,9 @@ public class Selection implements ActionListener, PropertyChangeListener {
 
     // EFFECTS: adds a text box for a seat level
     private void levelSetting() {
-        levelLabel.setBounds(10,50,500,25);
+        levelLabel.setBounds(50,70,500,25);
         frame.add(levelLabel);
-        levelText.setBounds(100,50,165,25);
+        levelText.setBounds(140,70,165,25);
         levelText.addPropertyChangeListener("value", this);
         levelText.setValue(new String(level));
         frame.add(levelText);
@@ -223,9 +233,9 @@ public class Selection implements ActionListener, PropertyChangeListener {
 
     // EFFECTS: adds a text box for a seat section
     private void sectionSetting() {
-        sectionLabel.setBounds(10,80,80,25);
+        sectionLabel.setBounds(50,100,80,25);
         frame.add(sectionLabel);
-        sectionText.setBounds(100,80,165,25);
+        sectionText.setBounds(140,100,165,25);
         sectionText.addPropertyChangeListener("value", this);
         sectionText.setValue(new Integer(section));
         frame.add(sectionText);
@@ -233,9 +243,9 @@ public class Selection implements ActionListener, PropertyChangeListener {
 
     // EFFECTS: adds a text box for a seat row
     private void rowSetting() {
-        rowLabel.setBounds(10,110,80,25);
+        rowLabel.setBounds(50,130,80,25);
         frame.add(rowLabel);
-        rowText.setBounds(100,110,165,25);
+        rowText.setBounds(140,130,165,25);
         rowText.addPropertyChangeListener("value", this);
         rowText.setValue(new Integer(row));
         frame.add(rowText);
@@ -243,9 +253,9 @@ public class Selection implements ActionListener, PropertyChangeListener {
 
     // EFFECTS: adds a text box for a seat number
     private void numberSetting() {
-        numberLabel.setBounds(10,140,80,25);
+        numberLabel.setBounds(50,160,80,25);
         frame.add(numberLabel);
-        numberText.setBounds(100,140,165,25);
+        numberText.setBounds(140,160,165,25);
         numberText.addPropertyChangeListener("value", this);
         numberText.setValue(new Integer(number));
         frame.add(numberText);
@@ -254,9 +264,9 @@ public class Selection implements ActionListener, PropertyChangeListener {
     // EFFECTS: adds a text box for a seat price
     private void priceSetting() {
         price = computePrice(level, row);
-        priceLabel.setBounds(10,170,80,25);
+        priceLabel.setBounds(50,190,80,25);
         frame.add(priceLabel);
-        priceText.setBounds(100,170,165,25);
+        priceText.setBounds(140,190,165,25);
         priceText.addPropertyChangeListener("value", this);
         priceText.setValue(new Double(price));
         priceText.setEditable(false);
@@ -281,7 +291,7 @@ public class Selection implements ActionListener, PropertyChangeListener {
 
         // create JScrollPane
         JScrollPane pane = new JScrollPane(table);
-        pane.setBounds(10, 300, 500, 400);
+        pane.setBounds(50, 300, 500, 400);
 
         frame.add(pane);
         getSelectedRowAction();

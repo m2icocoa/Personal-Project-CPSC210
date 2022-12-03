@@ -52,13 +52,13 @@ class TicketTest {
     @Test
     public void testAssignPriceIfLower() {
         testTicket.assignPrice("lower", 10);
-        assertEquals(100.0 + 2.0 * (23 + 1 - 10), testTicket.getPrice());
+        assertEquals(50.0 + 2.5 * (23 + 1 - 10), testTicket.getPrice());
     }
 
     @Test
     public void testAssignPriceIfUpper() {
         testTicket.assignPrice("upper", 10);
-        assertEquals(80.0 + 1.5 * (23 + 1 - 10), testTicket.getPrice());
+        assertEquals(50.0 + 1.5 * (23 + 1 - 10), testTicket.getPrice());
     }
 
     @Test

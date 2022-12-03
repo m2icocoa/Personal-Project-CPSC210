@@ -18,6 +18,7 @@ Thus, I decided to create a system where we buy concert tickets hoping that BTS 
 
 # User Stories
 - As a user, I want to be able to select a ticket.
+- As a user, I want to be able to remove a ticket from my cart.
 - As a user, I want to be able to know the price of the selected seat depending on how close it is to the stage.
 - As a user, I want to be able to put a ticket to my cart.
 - As a user, I want to be able to check the number of tickets in my cart.
@@ -25,17 +26,6 @@ Thus, I decided to create a system where we buy concert tickets hoping that BTS 
 - As a user, when I select the quit option from the application menu, 
 I want to be reminded to save my cart to file and have the option to do so or not.
 - As a user, when I start the application, I want to be given the option to load my cart from file.
-
-
-### Potential Future User Stories
-If I have time to do more...
-- As a user, I want to be able to remove a ticket from my cart.
-- As a user, I want to be able to select the date and time of the concert.
-- As a user, I want to be able to see if the selected ticket is still available or already sold out.
-- As a user, I want to be able not to exceed the maximum number of tickets I can purchase.
-- As a user, I want to be able to select a ticket whose price is lower than or equal to my budget.
-- As a user, I want to be able to get a discount by using my membership status.
-- As a user, I want to be able to select and add a light stick (ARMY Bomb) to my cart. 
 
 
 # Instructions for Grader
@@ -62,6 +52,13 @@ Ticket updated.Fri Dec 02 17:49:44 PST 2022
 Ticket updated.Fri Dec 02 17:49:52 PST 2022
 Ticket removed from cart.Saved Mii's cart to ./data/my-cart.json
 
+
+# Phase 4: Task 3
+If I have time to do more I would make a restriction on the maximum number of tickets each customer can purchase.
+In addition, I would reflect the seating chart attached to my system.
+Since the actual seating chart does not have the constant number of rows in each section, 
+it does not precisely correspond to what I implemented in this project (constant row and number of seats).
+In this way, users would be able to easily select a seat while looking at the seating chart.
   
 # Reference
 Some methods in this project are cited from:

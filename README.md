@@ -50,7 +50,7 @@ labelled "Quit" or the X button on the right corner, the message pops up to give
 
 
 # Phase 4: Task 2
-The events logged are "Add" and "Delete".
+The events logged are "Add a ticket to cart", "Remove a ticket from a cart", and "Update a ticket".
 An example of the events logged:
 
 Saved Mii's cart to ./data/my-cart.json 

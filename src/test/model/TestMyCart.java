@@ -3,6 +3,8 @@ package model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Iterator;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -39,6 +41,7 @@ public class TestMyCart {
         testMyCart.addTicket(ticketOne);
         assertEquals(1, testMyCart.quantity());
     }
+
 
     @Test
     public void testAddSameTicketMultipleTimes() {

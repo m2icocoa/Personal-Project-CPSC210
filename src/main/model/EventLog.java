@@ -57,4 +57,8 @@ public class EventLog implements Iterable<Event> {
     public Iterator<Event> iterator() {
         return events.iterator();
     }
+
+    // Method above were taken from Thingy in:
+    // https://github.students.cs.ubc.ca/CPSC210/AlarmSystem.git
 }
+

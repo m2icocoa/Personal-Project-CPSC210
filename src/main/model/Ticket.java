@@ -83,6 +83,7 @@ public class Ticket implements Writable {
         return price;
     }
 
+
     // EFFECTS: returns string representation of this ticket
     public String toString() {
         return "Level: " + level + ", "
@@ -91,6 +92,7 @@ public class Ticket implements Writable {
                 + "Number: " + number + ", "
                 + "Price: $" + price;
     }
+
 
     @Override
     public JSONObject toJson() {
@@ -102,6 +104,7 @@ public class Ticket implements Writable {
         json.put("price", price);
         return json;
     }
+
     // Method above were taken from Thingy in:
     // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
 }

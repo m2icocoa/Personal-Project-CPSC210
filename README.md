@@ -53,4 +53,5 @@ Some methods in this project are cited from:
 https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
 https://www.youtube.com/watch?v=22MBsRYuM4Q
 https://1bestcsharp.blogspot.com/2015/05/java-jtable-add-delete-update-row.html
+https://github.students.cs.ubc.ca/CPSC210/AlarmSystem.git
 

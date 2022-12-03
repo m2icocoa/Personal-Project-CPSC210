@@ -64,4 +64,7 @@ public class Event {
     public String toString() {
         return dateLogged.toString() + "\n" + description;
     }
+
+    // Method above were taken from Thingy in:
+    // https://github.students.cs.ubc.ca/CPSC210/AlarmSystem.git
 }

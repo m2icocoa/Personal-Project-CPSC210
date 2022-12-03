@@ -14,11 +14,13 @@ public class MyCart implements Writable {
     ArrayList<Ticket> cart;
     private int indexOfCorresponding;
 
+
     // EFFECTS: constructs an empty cart
     public MyCart(String name) {
         this.name = name;
         this.cart = new ArrayList<>();
     }
+
 
     // MODIFIES: this
     // EFFECTS: adds a ticket into my cart unless it's already there, in which case do nothing
@@ -29,10 +31,12 @@ public class MyCart implements Writable {
         }
     }
 
+
     // EFFECTS: returns an unmodifiable list of tickets in this cart
     public List<Ticket> getTickets() {
         return Collections.unmodifiableList(cart);
     }
+
 
     // MODIFIES: this
     // EFFECTS: if the ticket is in my cart, then remove it from my cart,
@@ -44,17 +48,22 @@ public class MyCart implements Writable {
         }
     }
 
-    // TODO
-    public void removeTicketForGUI(int i) {
+
+    // MODIFIES: this
+    // EFFECTS: removes the ticket at the selected index from my cart
+    public void removeTicketForSelectionApp(int i) {
         cart.remove(cart.get(i));
         EventLog.getInstance().logEvent(new Event("Ticket removed from cart."));
     }
 
-    // TODO
-    public void updateTicketForGUI(int i, Ticket ticket) {
+
+    // MODIFIES: this
+    // EFFECTS: updates the ticket at the selected index from my cart by preferred ticket typed in the text box
+    public void updateTicketForSelectionApp(int i, Ticket ticket) {
         cart.set(i, ticket);
         EventLog.getInstance().logEvent(new Event("Ticket updated."));
     }
+
 
     // EFFECTS: if the exact same ticket is in my cart, return true,
     //          otherwise, return false
@@ -73,6 +82,7 @@ public class MyCart implements Writable {
         }
         return false;
     }
+
 
     // EFFECTS: return the selected ticket in my cart
     public Ticket seeInside(int num) {
@@ -114,6 +124,7 @@ public class MyCart implements Writable {
         return name;
     }
 
+
     // EFFECTS: if the cart contains at least one ticket, returns the total price of tickets in my cart,
     //          otherwise, returns $0.0
     public double totalPrice() {
@@ -149,6 +160,7 @@ public class MyCart implements Writable {
 
         return jsonArray;
     }
+
     // Method above were taken from WorkRoom in:
     // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
 }

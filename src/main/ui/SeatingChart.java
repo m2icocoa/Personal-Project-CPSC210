@@ -10,8 +10,9 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
-// Seating Chart Application
+// Represents a seating chart application
 public class SeatingChart {
+
     private static final String JSON_STORE = "./data/my-cart.json";
     private MyCart myCart;
     private JsonWriter jsonWriter;
@@ -29,6 +30,7 @@ public class SeatingChart {
         jsonReader = new JsonReader(JSON_STORE);
         runSeatingChart();
     }
+
 
     // MODIFIES: this
     // EFFECTS: processes user input
@@ -72,6 +74,7 @@ public class SeatingChart {
         }
     }
 
+
     // EFFECTS: conducts a seat selection
     private void doSelect() {
         selectLevel();
@@ -82,6 +85,7 @@ public class SeatingChart {
         displayAddOrRemove();
         addOrDoNothing();
     }
+
 
     // EFFECTS: conducts addition of a ticket
     private void addOrDoNothing() {
@@ -97,6 +101,7 @@ public class SeatingChart {
         }
     }
 
+
     // MODIFIES: this
     // EFFECTS: if the preferred seat level is either lower or upper, conducts a seat level selection,
     //          otherwise says the input is invalid
@@ -110,6 +115,7 @@ public class SeatingChart {
             selectLevel();
         }
     }
+
 
     // MODIFIES: this
     // EFFECTS: if seatSection is either [100, 110] or [200, 210], conducts a seat section selection,
@@ -138,6 +144,7 @@ public class SeatingChart {
         }
     }
 
+
     // MODIFIES: this
     // EFFECTS: if seatRow is [1, 23], assigns it to row, conducts a seat row selection,
     //          otherwise says the input is invalid
@@ -150,6 +157,7 @@ public class SeatingChart {
             System.out.println("You entered an invalid row.");
         }
     }
+
 
     // MODIFIES: this
     // EFFECTS: if seatNumber is is [1, 20], conducts a seat number selection,
@@ -164,12 +172,14 @@ public class SeatingChart {
         }
     }
 
+
     // EFFECTS: prints price of the preferred seat to the screen
     private void printPrice() {
         System.out.println("The price of selected seat is "
                 + selected.assignPrice(selected.getLevel(), selected.getRow())
                 + " Dollars");
     }
+
 
     // EFFECTS: adds the preferred seat to the cart
     private void addSeatToMyCart() {
@@ -186,6 +196,7 @@ public class SeatingChart {
         selected = new Ticket(null, 0, 0, 0,0.0);
     }
 
+
     // EFFECTS: removes the preferred seat to the cart
     private void removeSeatFromMyCart() {
         if (myCart.ifContains(selected)) {
@@ -201,6 +212,7 @@ public class SeatingChart {
         selected = new Ticket(null, 0, 0, 0,0.0);
     }
 
+
     // EFFECTS: counts how many tickets in the cart
     private void checkHowManyTickets() {
         if (myCart.quantity() == 0 || myCart.quantity() == 1) {
@@ -210,18 +222,12 @@ public class SeatingChart {
         }
     }
 
+
     // EFFECTS: calculates the total price of tickets in the cart
     private void checkTotalPrice() {
         System.out.println("Total price: $" + myCart.totalPrice());
     }
 
-//    // MODIFIES: this
-//    // EFFECTS: initializes my cart
-//    private void init() {
-//        myCart = new MyCart();
-//        input = new Scanner(System.in);
-//        input.useDelimiter("\n");
-//    }
 
     // EFFECTS: displays menu of options to user
     private void displayMenu() {
@@ -235,12 +241,14 @@ public class SeatingChart {
         System.out.println("\tq -> quit");
     }
 
+
     // EFFECTS: displays a question where a user wants to add/remove the selected ticket to/from the cart
     private void displayAddOrRemove() {
         System.out.println("\nWould you like to add or remove this ticket?");
         System.out.println("\ta -> add");
         System.out.println("\tr -> remove");
     }
+
 
     // EFFECTS: prints all the tickets in my cart to the console
     private void printMyCart() {
@@ -250,6 +258,7 @@ public class SeatingChart {
             System.out.println(mc);
         }
     }
+
 
     // EFFECTS: saves the cart to file
     private void saveMyCart() {
@@ -262,6 +271,7 @@ public class SeatingChart {
             System.out.println("Unable to write to file: " + JSON_STORE);
         }
     }
+
 
     // MODIFIES: this
     // EFFECTS: loads the cart from file

@@ -92,7 +92,7 @@ public class Selection implements ActionListener, PropertyChangeListener {
         createTable();
 
         frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        frame.setSize(1500,1000);
+        frame.setSize(1500, 1000);
         frame.setLayout(null);
         frame.setVisible(true);
 
@@ -147,7 +147,7 @@ public class Selection implements ActionListener, PropertyChangeListener {
         ImageIcon seatingChart = new ImageIcon(getClass().getResource("chart.png"));
         JLabel chart = new JLabel();
         chart.setIcon(seatingChart);
-        chart.setBounds(600,300,800,400);
+        chart.setBounds(600, 300, 800, 400);
         frame.add(chart);
     }
 
@@ -191,7 +191,7 @@ public class Selection implements ActionListener, PropertyChangeListener {
 
     // EFFECTS: adds a deletion feature as a button in the frame
     private void deleteButtonSetting() {
-        deleteButton.setBounds(320,150,100,40);
+        deleteButton.setBounds(320, 150, 100, 40);
         deleteButton.addActionListener(this);
         deleteButton.setActionCommand("Delete");
         frame.add(deleteButton);
@@ -200,7 +200,7 @@ public class Selection implements ActionListener, PropertyChangeListener {
 
     // EFFECTS: adds an updating feature as a button in the frame
     private void updateButtonSetting() {
-        updateButton.setBounds(320,110,100,40);
+        updateButton.setBounds(320, 110, 100, 40);
         updateButton.addActionListener(this);
         updateButton.setActionCommand("Update");
         frame.add(updateButton);
@@ -209,7 +209,7 @@ public class Selection implements ActionListener, PropertyChangeListener {
 
     // EFFECTS: adds an addition feature as a button in the frame
     private void addButtonSetting() {
-        addButton.setBounds(320,70,100,40);
+        addButton.setBounds(320, 70, 100, 40);
         addButton.addActionListener(this);
         addButton.setActionCommand("Add");
         frame.add(addButton);
@@ -218,7 +218,7 @@ public class Selection implements ActionListener, PropertyChangeListener {
 
     // EFFECTS: adds a quitting feature as a button in the frame
     private void quitButtonSetting() {
-        quitButton.setBounds(230,10,100,25);
+        quitButton.setBounds(230, 10, 100, 25);
         quitButton.addActionListener(this);
         quitButton.setActionCommand("Quit");
         frame.add(quitButton);
@@ -227,7 +227,7 @@ public class Selection implements ActionListener, PropertyChangeListener {
 
     // EFFECTS: adds a saving feature as a button in the frame
     private void saveButtonSetting() {
-        saveButton.setBounds(140,10,100,25);
+        saveButton.setBounds(140, 10, 100, 25);
         saveButton.addActionListener(this);
         saveButton.setActionCommand("Save");
         frame.add(saveButton);
@@ -236,7 +236,7 @@ public class Selection implements ActionListener, PropertyChangeListener {
 
     // EFFECTS: adds a loading feature as a button in the frame
     private void loadButtonSetting() {
-        loadButton.setBounds(50,10,100,25);
+        loadButton.setBounds(50, 10, 100, 25);
         loadButton.addActionListener(this);
         loadButton.setActionCommand("Load");
         frame.add(loadButton);
@@ -245,44 +245,44 @@ public class Selection implements ActionListener, PropertyChangeListener {
 
     // EFFECTS: adds a text box for a seat level
     private void levelSetting() {
-        levelLabel.setBounds(50,70,500,25);
+        levelLabel.setBounds(50, 70, 500, 25);
         frame.add(levelLabel);
-        levelText.setBounds(140,70,165,25);
+        levelText.setBounds(140, 70, 165, 25);
         levelText.addPropertyChangeListener("value", this);
-        levelText.setValue(new String(level));
+        levelText.setValue(level);
         frame.add(levelText);
     }
 
 
     // EFFECTS: adds a text box for a seat section
     private void sectionSetting() {
-        sectionLabel.setBounds(50,100,80,25);
+        sectionLabel.setBounds(50, 100, 80, 25);
         frame.add(sectionLabel);
-        sectionText.setBounds(140,100,165,25);
+        sectionText.setBounds(140, 100, 165, 25);
         sectionText.addPropertyChangeListener("value", this);
-        sectionText.setValue(new Integer(section));
+        sectionText.setValue(section);
         frame.add(sectionText);
     }
 
 
     // EFFECTS: adds a text box for a seat row
     private void rowSetting() {
-        rowLabel.setBounds(50,130,80,25);
+        rowLabel.setBounds(50, 130, 80, 25);
         frame.add(rowLabel);
-        rowText.setBounds(140,130,165,25);
+        rowText.setBounds(140, 130, 165, 25);
         rowText.addPropertyChangeListener("value", this);
-        rowText.setValue(new Integer(row));
+        rowText.setValue(row);
         frame.add(rowText);
     }
 
 
     // EFFECTS: adds a text box for a seat number
     private void numberSetting() {
-        numberLabel.setBounds(50,160,80,25);
+        numberLabel.setBounds(50, 160, 80, 25);
         frame.add(numberLabel);
-        numberText.setBounds(140,160,165,25);
+        numberText.setBounds(140, 160, 165, 25);
         numberText.addPropertyChangeListener("value", this);
-        numberText.setValue(new Integer(number));
+        numberText.setValue(number);
         frame.add(numberText);
     }
 
@@ -290,11 +290,11 @@ public class Selection implements ActionListener, PropertyChangeListener {
     // EFFECTS: adds a text box for a seat price
     private void priceSetting() {
         price = computePrice(level, row);
-        priceLabel.setBounds(50,190,80,25);
+        priceLabel.setBounds(50, 190, 80, 25);
         frame.add(priceLabel);
-        priceText.setBounds(140,190,165,25);
+        priceText.setBounds(140, 190, 165, 25);
         priceText.addPropertyChangeListener("value", this);
-        priceText.setValue(new Double(price));
+        priceText.setValue(price);
         priceText.setEditable(false);
         priceText.setForeground(Color.red);
         frame.add(priceText);
@@ -311,7 +311,7 @@ public class Selection implements ActionListener, PropertyChangeListener {
         table.setModel(model);
         table.setBackground(Color.LIGHT_GRAY);
         table.setForeground(Color.black);
-        Font font = new Font("",1,22);
+        Font font = new Font("", 1, 22);
         table.setFont(font);
         table.setRowHeight(30);
 
@@ -338,37 +338,9 @@ public class Selection implements ActionListener, PropertyChangeListener {
                 sectionText.setText(model.getValueAt(i, 1).toString());
                 rowText.setText(model.getValueAt(i, 2).toString());
                 numberText.setText(model.getValueAt(i, 3).toString());
-                priceText.setText(model.getValueAt(i,4).toString());
+                priceText.setText(model.getValueAt(i, 4).toString());
             }
         });
-    }
-
-
-    // MODIFIES: this
-    // EFFECTS: when the updating button is clicked,
-    //          overwrites the information in the table by text fields after the row is selected
-    private void updateAction() {
-        // i = the index of the selected row
-        int i = table.getSelectedRow();
-        String level = (String) levelText.getValue();
-        int section = ((Number) sectionText.getValue()).intValue();
-        int row = ((Number) rowText.getValue()).intValue();
-        int number = ((Number) numberText.getValue()).intValue();
-        double price = (Double) priceText.getValue();
-        Ticket ticket = new Ticket(level, section, row, number, price);
-
-        if (i >= 0 && !myCart.ifContains(ticket)) {
-
-            model.setValueAt(level, i, 0);
-            model.setValueAt(section, i, 1);
-            model.setValueAt(row, i, 2);
-            model.setValueAt(number, i, 3);
-            model.setValueAt("$" + price, i, 4);
-
-            myCart.updateTicketForSelectionApp(i, ticket);
-        } else {
-            duplicatesWarning();
-        }
     }
 
 
@@ -436,11 +408,7 @@ public class Selection implements ActionListener, PropertyChangeListener {
         Ticket ticket = new Ticket(level, section, row, number, (Double) priceText.getValue());
         if (!level.equals("lower") && !level.equals("upper")) {
             invalidLevelWarning();
-        } else if ((level.equals("lower") && !(section >= 100 && section <= 110))
-                || (level.equals("upper") && !(section >= 200 && section <= 210))
-                || (section > 110 && section < 200)
-                || (section < 100)
-                || (section > 210)) {
+        } else if (checkLevelMatchesSection(level, section)) {
             invalidSectionWarning();
         } else if (!(row >= 1 && row <= 23)) {
             invalidRowWarning();
@@ -465,7 +433,7 @@ public class Selection implements ActionListener, PropertyChangeListener {
     // EFFECTS: creates a pop-up display that warns the invalid row error
     private void invalidRowWarning() {
         JOptionPane.showMessageDialog(null, "You entered an invalid row.",
-                "Invalid",  JOptionPane.ERROR_MESSAGE);
+                "Invalid", JOptionPane.ERROR_MESSAGE);
     }
 
 
@@ -510,16 +478,16 @@ public class Selection implements ActionListener, PropertyChangeListener {
     public void propertyChange(PropertyChangeEvent e) {
         Object source = e.getSource();
         if (source == levelText) {
-            level = (String)levelText.getValue();
+            level = (String) levelText.getValue();
         } else if (source == sectionText) {
-            section = ((Number)sectionText.getValue()).intValue();
+            section = ((Number) sectionText.getValue()).intValue();
         } else if (source == rowText) {
-            row = ((Number)rowText.getValue()).intValue();
+            row = ((Number) rowText.getValue()).intValue();
         } else if (source == numberText) {
             number = ((Number) numberText.getValue()).intValue();
         }
         double price = computePrice(level, row);
-        priceText.setValue(new Double(price));
+        priceText.setValue(price);
     }
 
 
@@ -591,5 +559,54 @@ public class Selection implements ActionListener, PropertyChangeListener {
         } else if (response == 1) {
             System.exit(0);
         }
+    }
+
+
+    // MODIFIES: this
+    // EFFECTS: when the updating button is clicked,
+    //          overwrites the information in the table by text fields after the row is selected
+    private void updateAction() {
+        int i = table.getSelectedRow();
+        String level = (String) levelText.getValue();
+        int section = ((Number) sectionText.getValue()).intValue();
+        int row = ((Number) rowText.getValue()).intValue();
+        int number = ((Number) numberText.getValue()).intValue();
+        double price = (Double) priceText.getValue();
+        Ticket ticket = new Ticket(level, section, row, number, price);
+
+        if (!level.equals("lower") && !level.equals("upper")) {
+            invalidLevelWarning();
+        } else if (checkLevelMatchesSection(level, section)) {
+            invalidSectionWarning();
+        } else if (!(row >= 1 && row <= 23)) {
+            invalidRowWarning();
+        } else if (!(number >= 1 && number <= 20)) {
+            invalidNumberWarning();
+        } else if (myCart.ifContains(ticket)) {
+            duplicatesWarning();
+        } else if (i >= 0 && !myCart.ifContains(ticket)) {
+            ticketSetValueAt(i, level, section, row, number, price);
+            myCart.updateTicketForSelectionApp(i, ticket);
+        } else {
+            duplicatesWarning();
+        }
+    }
+
+
+    // EFFECTS: returns true if level and section input by user does meet the requirement, otherwise returns false
+    private boolean checkLevelMatchesSection(String level, int section) {
+        return (level.equals("lower") && !(section >= 100 && section <= 110))
+                || (level.equals("upper") && !(section >= 200 && section <= 210)) || (section > 110 && section < 200)
+                || (section < 100) || (section > 210);
+    }
+
+
+    // EFFECTS: transposes the values of ticket into the selected row
+    private void ticketSetValueAt(int i, String level, int section, int row, int number, double price) {
+        model.setValueAt(level, i, 0);
+        model.setValueAt(section, i, 1);
+        model.setValueAt(row, i, 2);
+        model.setValueAt(number, i, 3);
+        model.setValueAt("$" + price, i, 4);
     }
 }

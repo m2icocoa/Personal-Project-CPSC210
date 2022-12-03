@@ -1,4 +1,26 @@
 {
-    "tickets": [],
+    "tickets": [
+        {
+            "number": 10,
+            "level": "upper",
+            "price": 78.5,
+            "section": 200,
+            "row": 5
+        },
+        {
+            "number": 6,
+            "level": "lower",
+            "price": 97.5,
+            "section": 103,
+            "row": 5
+        },
+        {
+            "number": 10,
+            "level": "lower",
+            "price": 97.5,
+            "section": 103,
+            "row": 5
+        }
+    ],
     "name": "Mii's cart"
 }

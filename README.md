@@ -37,6 +37,7 @@ If I have time to do more...
 - As a user, I want to be able to get a discount by using my membership status.
 - As a user, I want to be able to select and add a light stick (ARMY Bomb) to my cart. 
 
+
 # Instructions for Grader
 - I can generate the first required event by filling out the seat information I desire 
 and clicking the button labelled "Add". 
@@ -48,6 +49,20 @@ labelled "Quit" or the X button on the right corner, the message pops up to give
 - I can reload the state of my application by clicking the button labelled "Load".
 
 
+# Phase 4: Task 2
+The events logged are "Add" and "Delete".
+An example of the events logged:
+
+Saved Mii's cart to ./data/my-cart.json 
+Fri Dec 02 17:47:48 PST 2022
+Ticket added to cart.Fri Dec 02 17:47:54 PST 2022
+Ticket added to cart.Fri Dec 02 17:47:58 PST 2022
+Ticket added to cart.Fri Dec 02 17:49:13 PST 2022
+Ticket updated.Fri Dec 02 17:49:44 PST 2022
+Ticket updated.Fri Dec 02 17:49:52 PST 2022
+Ticket removed from cart.Saved Mii's cart to ./data/my-cart.json
+
+  
 # Reference
 Some methods in this project are cited from:
 https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git

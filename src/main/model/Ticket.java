@@ -2,7 +2,6 @@ package model;
 
 import org.json.JSONObject;
 import persistence.Writable;
-import ui.gui.Selection;
 
 // Represents a ticket with seat level, section, row, number and price (in dollars)
 public class Ticket implements Writable {

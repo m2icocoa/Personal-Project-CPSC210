@@ -1,10 +1,4 @@
 {
-    "tickets": [{
-        "number": 4,
-        "level": "lower",
-        "price": 102.5,
-        "section": 100,
-        "row": 3
-    }],
+    "tickets": [],
     "name": "Mii's cart"
 }
